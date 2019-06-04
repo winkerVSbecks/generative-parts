@@ -13,13 +13,13 @@ function App() {
           <Flex flexDirection="column" mr={3} width={240}>
             <TypographySwatch height={176} mb={3} />
             {/* Profile */}
-            <Card borderRadius={3} bg="white" height={288} />
+            <Card borderRadius={3} bg="white" height={280} />
           </Flex>
           <Flex flexDirection="column" width={384} mr={3}>
             {/* Navbar */}
             <Card borderRadius={3} bg="white" height={64} mb={3} />
             {/* Media Card */}
-            <Card borderRadius={3} bg="white" height={336} mb={3} />
+            <Card borderRadius={3} bg="white" height={328} mb={3} />
             {/* Searchbar */}
             <Card borderRadius={3} bg="white" height={48} />
           </Flex>
