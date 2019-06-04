@@ -14,14 +14,14 @@ function App() {
           <ComponentGrid>
             <ComponentGrid.One>
               <TypographySwatch height={[80, 176]} mb={3} />
-              <Card borderRadius={3} bg="white" height={[208, 280, 280]} />
+              <Card borderRadius={3} bg="white" height={[176, 280, 280]} />
             </ComponentGrid.One>
             <ComponentGrid.Two>
               <Card borderRadius={3} bg="white" height={64} mb={3} />
               <Card
                 borderRadius={3}
                 bg="white"
-                height={[208, 328, 328]}
+                height={[176, 328, 328]}
                 mb={3}
               />
               <Card borderRadius={3} bg="white" height={48} />
