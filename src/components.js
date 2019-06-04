@@ -6,7 +6,7 @@ import theme from './theme';
 
 export const TypographySwatch = props => (
   <Card bg="white" alignItems="center" justifyContent="center" {...props}>
-    <Text fontWeight={600} fontSize={[6, 7, 7]} m={0} lineHeight="solid">
+    <Text fontWeight={600} fontSize={[6, 7, 8]} m={0} lineHeight="solid">
       Aa
     </Text>
   </Card>
@@ -17,8 +17,8 @@ export const ColorSwatch = ({ name, ...props }) => (
     <Box bg={name} flex="1 1 auto" />
     <Text
       style={{ textTransform: 'capitalize' }}
-      fontWeight={600}
-      fontSize={2}
+      fontWeight={500}
+      fontSize={1}
       m={0}
       lineHeight="solid"
       p={3}
@@ -29,22 +29,21 @@ export const ColorSwatch = ({ name, ...props }) => (
 );
 
 export const ComponentGrid = styled(Card)(grid, {
-  display: 'grid',
-  flex: 'none',
-  // width: '100%',
+  height: '90vh',
+  width: '82vw',
 });
 
-const gridUnit = 64;
+const gridUnit = 48;
 
 ComponentGrid.defaultProps = {
   borderRadius: 3,
-  gridGap: 4,
+  gridGap: 3,
   backgroundColor: 'tertiary',
   px: [3, 3, 6],
-  py: [3, 4, 6],
+  py: [3, 3, 5],
   mx: [2, 3, 3],
-  gridTemplateColumns: `repeat(12, ${gridUnit}px)`,
-  gridAutoRows: gridUnit,
-  gridAutoFlow: 'dense',
-  // maxWidth: 7,
 };
+
+// 240 380 180
+
+// 4  6  3
