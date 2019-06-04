@@ -1,25 +1,70 @@
 import React from 'react';
-import logo from './logo.svg';
+import { ThemeProvider } from 'emotion-theming';
 import './App.css';
+import theme from './theme';
+import { Card, Box } from './primitives';
+import { ComponentGrid, TypographySwatch, ColorSwatch } from './components';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height="100vh"
+      >
+        <ComponentGrid borderRadius={4}>
+          <TypographySwatch
+            gridColumn="auto / span 3"
+            gridRow="auto / span 2"
+          />
+          {/* Navbar */}
+          <Card
+            borderRadius={3}
+            bg="white"
+            gridColumn="auto / span 5"
+            gridRow="auto / span 1"
+          />
+          {/* Media Card */}
+          <Card
+            borderRadius={3}
+            bg="white"
+            gridColumn="auto / span 5"
+            gridRow="auto / span 4"
+          />
+          {/* Profile */}
+          <Card
+            borderRadius={3}
+            bg="white"
+            gridColumn="auto / span 3"
+            gridRow="auto / span 4"
+          />
+          {/* Searchbar */}
+          <Card
+            borderRadius={3}
+            bg="white"
+            gridColumn="auto / span 5"
+            gridRow="auto / span 1"
+          />
+          <ColorSwatch
+            name="black"
+            gridColumn="auto / span 3"
+            gridRow="auto / span 2"
+          />
+          <ColorSwatch
+            name="primary"
+            gridColumn="auto / span 3"
+            gridRow="auto / span 2"
+          />
+          <ColorSwatch
+            name="secondary"
+            gridColumn="auto / span 3"
+            gridRow="auto / span 2"
+          />
+        </ComponentGrid>
+      </Box>
+    </ThemeProvider>
   );
 }
 
