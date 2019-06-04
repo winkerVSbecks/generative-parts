@@ -1,5 +1,5 @@
 export default {
-  breakpoints: ['40em', '52em', '64em'],
+  breakpoints: ['52em', '64em', '72em'],
   colors: {
     black: '#2d2733',
     primary: '#d675ff',

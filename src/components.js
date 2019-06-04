@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { grid, maxWidth } from 'styled-system';
+import { grid } from 'styled-system';
 import { Card, Text, Box } from './primitives';
-import theme from './theme';
 
 export const TypographySwatch = props => (
   <Card bg="white" alignItems="center" justifyContent="center" {...props}>
@@ -29,21 +28,20 @@ export const ColorSwatch = ({ name, ...props }) => (
 );
 
 export const ComponentGrid = styled(Card)(grid, {
-  height: '90vh',
-  width: '82vw',
+  position: 'absolute',
+  top: 0,
+  right: 0,
+  bottom: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
 });
 
-const gridUnit = 48;
-
 ComponentGrid.defaultProps = {
-  borderRadius: 3,
-  gridGap: 3,
   backgroundColor: 'tertiary',
-  px: [3, 3, 6],
-  py: [3, 3, 5],
-  mx: [2, 3, 3],
+  alignContent: 'center',
+  justifyItems: 'center',
+  justifyContent: 'center',
+  borderRadius: [0, 0, 0, 4],
+  flexWrap: ['wrap', 'wrap', 'no-wrap'],
 };
-
-// 240 380 180
-
-// 4  6  3
