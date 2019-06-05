@@ -2,8 +2,8 @@ import React from 'react';
 import { ThemeProvider } from 'emotion-theming';
 import './App.css';
 import theme from './theme';
-import { Card, Flex, Container, AspectRatio } from './primitives';
-import { TypographySwatch, ColorSwatch } from './components';
+import { Card, Container } from './primitives';
+import { TypographySwatch, ColorSwatch, NavBar } from './components';
 import { ComponentGrid } from './ComponentGrid';
 
 function App() {
@@ -12,11 +12,11 @@ function App() {
       <Container>
         <ComponentGrid mx={[0, 0, 0, 3]}>
           <ComponentGrid.One>
-            <TypographySwatch height={[80, 176]} mb={3} />
+            <TypographySwatch mb={3} />
             <Card borderRadius={3} bg="white" height={[176, 280, 280]} />
           </ComponentGrid.One>
           <ComponentGrid.Two>
-            <Card borderRadius={3} bg="white" height={64} mb={3} />
+            <NavBar mb={3} />
             <Card borderRadius={3} bg="white" height={[176, 328, 328]} mb={3} />
             <Card borderRadius={3} bg="white" height={48} />
           </ComponentGrid.Two>

@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from '@emotion/styled';
 import {
   space,
@@ -11,6 +12,8 @@ import {
   buttonStyle,
   grid,
 } from 'styled-system';
+import { ReactComponent as MenuIcon } from './menu.svg';
+import { ReactComponent as SearchIcon } from './search.svg';
 
 export const Box = styled.div(
   {
@@ -65,7 +68,7 @@ export const Card = styled(Box)(
 );
 
 Card.defaultProps = {
-  borderRadius: 3,
+  borderRadius: 4,
 };
 
 export const Button = styled(Box)(
@@ -80,6 +83,11 @@ export const Button = styled(Box)(
   border,
   buttonStyle,
 );
+
+Button.defaultProps = {
+  as: 'button',
+  border: 0,
+};
 
 export const Link = styled(Box)();
 
@@ -96,3 +104,23 @@ Container.defaultProps = {
   height: '100vh',
   maxWidth: 1184,
 };
+
+export const Menu = styled(MenuIcon)({}, color, space);
+export const Search = styled(SearchIcon)({}, color, space);
+
+export const TransparentButton = styled(Button)`
+  padding: 0;
+  background-color: transparent;
+  &:hover {
+    background-color: transparent;
+  }
+  & > div {
+    display: flex;
+  }
+`;
+
+export const IconButton = ({ name, icon, ...props }) => (
+  <TransparentButton {...props}>
+    <div aria-label={name}>{icon}</div>
+  </TransparentButton>
+);
