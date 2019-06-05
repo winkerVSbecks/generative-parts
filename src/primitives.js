@@ -90,7 +90,7 @@ export const Card = styled(Box)(
 );
 
 Card.defaultProps = {
-  borderRadius: 4,
+  borderRadius: 1,
 };
 
 export const Button = styled(Box)(

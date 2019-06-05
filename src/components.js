@@ -56,15 +56,15 @@ export const NavBar = ({ name, ...props }) => (
   </Card>
 );
 
-export const MediaCard = ({ image, ...props }) => (
+export const MediaCard = ({ image, title, body, ...props }) => (
   <Card bg="white" flexDirection={['row', 'column']} {...props}>
     <BackgroundImage image={image} minWidth={4} flex="1 1 auto" />
-    <Flex justifyContent="center" flexDirection="column" p={3}>
+    <Flex justifyContent="center" flexDirection="column" py={[3, 4]} px={3}>
       <Heading fontSize={2} color="black" mb={[3, 2]}>
-        Loyal Community
+        {title}
       </Heading>
       <Text fontSize={1} color="gray">
-        How to build a loyal community for your brand.
+        {body}
       </Text>
     </Flex>
   </Card>

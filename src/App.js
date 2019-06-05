@@ -5,25 +5,23 @@ import theme from './theme';
 import { Card, Container } from './primitives';
 import { TypographySwatch, ColorSwatch, NavBar, MediaCard } from './components';
 import { ComponentGrid } from './ComponentGrid';
-import breathe from './fabian-moller-401625-unsplash.jpg';
-
-// Breathe - Photo by Fabian Møller on Unsplash
-// Summer Days
-// I am awakened by these beams of light.
+import { useMocks } from './useMocks';
 
 function App() {
+  const [data, cycleData] = useMocks();
+
   return (
-    <ThemeProvider theme={theme}>
-      <Container>
+    <ThemeProvider theme={{ theme, ...data.theme }}>
+      <Container onClick={cycleData}>
         <ComponentGrid mx={[0, 0, 0, 3]}>
           <ComponentGrid.One>
             <TypographySwatch mb={3} />
-            <Card borderRadius={3} bg="white" height={[176, 280, 280]} />
+            <Card borderRadius={1} bg="white" height={[176, 280, 280]} />
           </ComponentGrid.One>
           <ComponentGrid.Two>
             <NavBar mb={3} />
-            <MediaCard image={breathe} height={[176, 328, 328]} mb={3} />
-            <Card borderRadius={3} bg="white" height={48} />
+            <MediaCard {...data.media} height={[176, 328, 328]} mb={3} />
+            <Card borderRadius={1} bg="white" height={48} />
           </ComponentGrid.Two>
           <ComponentGrid.Three>
             <ColorSwatch
