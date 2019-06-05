@@ -78,15 +78,16 @@ const variants = [
   },
 ];
 
-export function useMocks() {
-  const [active, setActive] = useState(0);
-  const [mockData, setMock] = useState(variants[active]);
+export function useThemes() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [theme, setTheme] = useState(variants[0]);
 
   return [
-    mockData,
-    () => {
-      setActive(active === variants.length - 1 ? 0 : active + 1);
-      setMock(variants[active]);
+    theme,
+    activeIndex,
+    index => {
+      setActiveIndex(index);
+      setTheme(variants[index]);
     },
   ];
 }

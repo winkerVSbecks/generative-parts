@@ -10,7 +10,7 @@ ComponentGrid.defaultProps = {
   justifyItems: 'center',
   justifyContent: 'center',
   borderRadius: [0, 0, 0, 2],
-  flexWrap: ['wrap', 'wrap', 'no-wrap', 'no-wrap'],
+  flexWrap: 'wrap', //['wrap', 'wrap', 'no-wrap', 'no-wrap'],
   height: ['100%', '100%', '100%', 720],
   width: ['100%', '100%', '100%', 1184],
 };

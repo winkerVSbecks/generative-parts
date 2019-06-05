@@ -14,6 +14,8 @@ import {
 } from 'styled-system';
 import { ReactComponent as MenuIcon } from './menu.svg';
 import { ReactComponent as SearchIcon } from './search.svg';
+import { ReactComponent as InfoIcon } from './info.svg';
+import { ReactComponent as CloseIcon } from './x-circle.svg';
 
 export const Box = styled.div(
   {
@@ -127,11 +129,7 @@ Container.defaultProps = {
   maxWidth: 1184,
 };
 
-export const Menu = styled(MenuIcon)({}, color, space);
-export const Search = styled(SearchIcon)({}, color, space);
-
 export const TransparentButton = styled(Button)`
-  padding: 0;
   background-color: transparent;
   &:hover {
     background-color: transparent;
@@ -141,8 +139,50 @@ export const TransparentButton = styled(Button)`
   }
 `;
 
+export const Menu = styled(MenuIcon)({}, color, space);
+export const Search = styled(SearchIcon)({}, color, space);
+export const Info = styled(InfoIcon)({}, color, space);
+export const Close = styled(CloseIcon)({}, color, space);
+
 export const IconButton = ({ name, icon, ...props }) => (
   <TransparentButton {...props}>
     <div aria-label={name}>{icon}</div>
   </TransparentButton>
 );
+
+export const Input = styled.input(
+  {
+    appearance: 'none',
+    display: 'block',
+    width: '100%',
+    fontFamily: 'inherit',
+    color: 'inherit',
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+    borderStyle: 'solid',
+    '::-ms-clear': {
+      display: 'none',
+    },
+  },
+  border,
+  space,
+  props => ({
+    '::placeholder': {
+      color: props.theme.gray,
+    },
+  }),
+);
+
+Input.defaultProps = {
+  fontSize: 1,
+  fontWeight: 400,
+  pt: 3,
+  pb: 3,
+  pl: 2,
+  pr: 2,
+  borderRadius: 0,
+  mt: 0,
+  mb: 0,
+  ml: 0,
+  mr: 0,
+};

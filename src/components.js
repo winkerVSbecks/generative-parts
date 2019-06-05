@@ -7,6 +7,7 @@ import {
   Heading,
   BackgroundImage,
   Flex,
+  Input,
 } from './primitives';
 import { ReactComponent as Menu } from './menu.svg';
 import { ReactComponent as Search } from './search.svg';
@@ -42,7 +43,7 @@ export const ColorSwatch = ({ name, ...props }) => (
 );
 
 export const NavBar = ({ name, ...props }) => (
-  <Card bg="white" height={64} alignItems="center" px={3} {...props}>
+  <Card as="nav" bg="white" height={64} alignItems="center" px={3} {...props}>
     <IconButton color="gray" name="Menu" icon={<Menu />} />
     <Heading
       fontSize={[3, 4]}
@@ -67,5 +68,20 @@ export const MediaCard = ({ image, title, body, ...props }) => (
         {body}
       </Text>
     </Flex>
+  </Card>
+);
+
+export const SearchBar = ({ name, ...props }) => (
+  <Card
+    as="section"
+    role="search"
+    bg="white"
+    height={64}
+    alignItems="center"
+    px={3}
+    {...props}
+  >
+    <Search color="gray" aria-hidden="true" />
+    <Input type="search" aria-label="search" ml={3} />
   </Card>
 );

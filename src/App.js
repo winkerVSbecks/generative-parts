@@ -3,16 +3,25 @@ import { ThemeProvider } from 'emotion-theming';
 import './App.css';
 import theme from './theme';
 import { Card, Container } from './primitives';
-import { TypographySwatch, ColorSwatch, NavBar, MediaCard } from './components';
+import {
+  TypographySwatch,
+  ColorSwatch,
+  NavBar,
+  MediaCard,
+  SearchBar,
+} from './components';
 import { ComponentGrid } from './ComponentGrid';
-import { useMocks } from './useMocks';
+import { useThemes } from './useThemes';
+import { Pager } from './Pager';
+import { InfoButton } from './Info';
 
 function App() {
-  const [data, cycleData] = useMocks();
+  const [data, activeIndex, selectTheme] = useThemes();
 
   return (
-    <ThemeProvider theme={{ theme, ...data.theme }}>
-      <Container onClick={cycleData}>
+    <ThemeProvider theme={{ ...theme, ...data.theme }}>
+      <Container>
+        <InfoButton />
         <ComponentGrid mx={[0, 0, 0, 3]}>
           <ComponentGrid.One>
             <TypographySwatch mb={3} />
@@ -21,7 +30,7 @@ function App() {
           <ComponentGrid.Two>
             <NavBar mb={3} />
             <MediaCard {...data.media} height={[176, 328, 328]} mb={3} />
-            <Card borderRadius={1} bg="white" height={48} />
+            <SearchBar height={48} />
           </ComponentGrid.Two>
           <ComponentGrid.Three>
             <ColorSwatch
@@ -38,6 +47,7 @@ function App() {
             />
             <ColorSwatch name="secondary" flex="1 1 146.67px" />
           </ComponentGrid.Three>
+          <Pager active={activeIndex} onUpdate={selectTheme} />
         </ComponentGrid>
       </Container>
     </ThemeProvider>
