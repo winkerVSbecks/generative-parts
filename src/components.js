@@ -1,6 +1,4 @@
 import React from 'react';
-import styled from '@emotion/styled';
-import { grid } from 'styled-system';
 import { Card, Text, Box } from './primitives';
 
 export const TypographySwatch = props => (

@@ -88,23 +88,6 @@ Link.defaultProps = {
   color: 'primary',
 };
 
-export const AspectRatio = styled(Box)(
-  {
-    // height: 0,
-    // width: '100%',
-    position: 'relative',
-  },
-  // props => ({
-  //   paddingBottom: `${props.ratio * 100}%`,
-  // }),
-);
-
-AspectRatio.defaultProps = {
-  height: ['100%', '100%', '100%', 720],
-  width: ['100%', '100%', '100%', 1184],
-  // flex: 'none',
-};
-
 export const Container = styled(Flex)({ overflow: 'hidden' });
 
 Container.defaultProps = {

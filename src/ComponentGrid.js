@@ -2,15 +2,7 @@ import styled from '@emotion/styled';
 import { grid } from 'styled-system';
 import { Card, Flex } from './primitives';
 
-export const ComponentGrid = styled(Card)(grid, {
-  position: 'absolute',
-  top: 0,
-  right: 0,
-  bottom: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
-});
+export const ComponentGrid = styled(Card)(grid, {});
 
 ComponentGrid.defaultProps = {
   backgroundColor: 'tertiary',
@@ -19,6 +11,8 @@ ComponentGrid.defaultProps = {
   justifyContent: 'center',
   borderRadius: [0, 0, 0, 4],
   flexWrap: ['wrap', 'wrap', 'no-wrap', 'no-wrap'],
+  height: ['100%', '100%', '100%', 720],
+  width: ['100%', '100%', '100%', 1184],
 };
 
 ComponentGrid.One = styled(Flex)();
