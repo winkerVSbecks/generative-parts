@@ -33,17 +33,25 @@ export const Flex = styled(Box)({
 export const Text = styled(Box)(typography);
 
 Text.defaultProps = {
+  as: 'p',
+  mb: 0,
+  mt: 0,
   fontFamily: 'inter',
+  lineHeight: 'body',
+  color: 'gray',
 };
 
 export const Heading = styled(Text)();
 
 Heading.defaultProps = {
   as: 'h2',
-  m: 0,
+  mb: 0,
+  mt: 0,
   fontSize: 4,
   fontWeight: 'bold',
   fontFamily: 'inter',
+  lineHeight: 'title',
+  color: 'black',
 };
 
 export const Image = styled(Box)(
@@ -58,6 +66,20 @@ Image.defaultProps = {
   as: 'img',
   m: 0,
 };
+
+export const BackgroundImage = styled.div(
+  {
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+  },
+  props => ({
+    backgroundColor: props.theme.colors.gray,
+    backgroundImage: props.image ? `url(${props.image})` : null,
+  }),
+  layout,
+  flexbox,
+);
 
 export const Card = styled(Box)(
   { display: 'flex', overflow: 'hidden' },

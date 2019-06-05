@@ -3,8 +3,13 @@ import { ThemeProvider } from 'emotion-theming';
 import './App.css';
 import theme from './theme';
 import { Card, Container } from './primitives';
-import { TypographySwatch, ColorSwatch, NavBar } from './components';
+import { TypographySwatch, ColorSwatch, NavBar, MediaCard } from './components';
 import { ComponentGrid } from './ComponentGrid';
+import breathe from './fabian-moller-401625-unsplash.jpg';
+
+// Breathe - Photo by Fabian Møller on Unsplash
+// Summer Days
+// I am awakened by these beams of light.
 
 function App() {
   return (
@@ -17,7 +22,7 @@ function App() {
           </ComponentGrid.One>
           <ComponentGrid.Two>
             <NavBar mb={3} />
-            <Card borderRadius={3} bg="white" height={[176, 328, 328]} mb={3} />
+            <MediaCard image={breathe} height={[176, 328, 328]} mb={3} />
             <Card borderRadius={3} bg="white" height={48} />
           </ComponentGrid.Two>
           <ComponentGrid.Three>
