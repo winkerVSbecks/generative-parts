@@ -9,6 +9,7 @@ import {
   NavBar,
   MediaCard,
   SearchBar,
+  ProfileCard,
 } from './components';
 import { ComponentGrid } from './ComponentGrid';
 import { useThemes } from './useThemes';
@@ -25,7 +26,7 @@ function App() {
           <InfoButton />
           <ComponentGrid.One>
             <TypographySwatch mb={3} />
-            <Card borderRadius={1} bg="white" height={[144, 280, 280]} />
+            <ProfileCard {...data.profile} height={[144, 280, 280]} />
           </ComponentGrid.One>
           <ComponentGrid.Two>
             <NavBar mb={3} />

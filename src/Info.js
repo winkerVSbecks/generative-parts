@@ -38,7 +38,10 @@ export const InfoButton = () => {
           />
         </Flex>
 
-        <p>Hello there. I am a dialog</p>
+        <p>
+          Hello there. I am a dialog
+          https://www.usedetails.com/?ref=land-book.com
+        </p>
       </StyledDialog>
     </React.Fragment>
   );

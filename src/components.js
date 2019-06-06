@@ -8,6 +8,8 @@ import {
   BackgroundImage,
   Flex,
   Input,
+  Image,
+  Button,
 } from './primitives';
 import { ReactComponent as Menu } from './menu.svg';
 import { ReactComponent as Search } from './search.svg';
@@ -83,5 +85,26 @@ export const SearchBar = ({ name, ...props }) => (
   >
     <Search color="gray" aria-hidden="true" />
     <Input type="search" aria-label="search" ml={3} />
+  </Card>
+);
+
+export const ProfileCard = ({ avatar, name, title, ...props }) => (
+  <Card
+    bg="white"
+    flexDirection={['row', 'column']}
+    alignItems="center"
+    justifyContent="center"
+    {...props}
+  >
+    <Image src={avatar} width={3} height={3} borderRadius="100%" />
+    <Box mt={3} justifyContent="center" flexDirection="column">
+      <Heading fontSize={2} color="black" textAlign="center" mb={2}>
+        {name}
+      </Heading>
+      <Text fontSize={2} color="gray" textAlign="center" mb={2}>
+        {title}
+      </Text>
+      <Button mx="auto">Follow</Button>
+    </Box>
   </Card>
 );
