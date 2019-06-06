@@ -27,9 +27,9 @@ const PagerItem = styled.li`
 const PagerNav = styled(Box)({}, position);
 
 PagerNav.defaultProps = {
-  position: ['relative', 'relative', 'absolute'],
-  bottom: [0, 0, '32px'],
-  my: [3, 4, 0],
+  position: ['relative', 'absolute'],
+  bottom: [0, '24px', '32px'],
+  my: [3, 0],
 };
 
 export const Pager = ({ active, onUpdate }) => (
