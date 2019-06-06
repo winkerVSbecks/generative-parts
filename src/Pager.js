@@ -24,7 +24,7 @@ const PagerItem = styled.li`
 `;
 
 export const Pager = ({ active, onUpdate }) => (
-  <Box as="nav" aria-label="Theme Navigation" width="100%" mt={4}>
+  <Box as="nav" aria-label="Theme Navigation" width="100%" mt={[2, 4]}>
     <Flex as="ul" alignItems="center" justifyContent="center" m={0} p={0}>
       <PagerItem>
         <IconButton

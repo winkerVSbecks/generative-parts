@@ -22,7 +22,7 @@ function App() {
     <ThemeProvider theme={{ ...theme, ...data.theme }}>
       <Container>
         <InfoButton />
-        <ComponentGrid mx={[0, 0, 0, 3]}>
+        <ComponentGrid mx={[0, 0, 0, 3]} pt={[0, 4]}>
           <ComponentGrid.One>
             <TypographySwatch mb={3} />
             <Card borderRadius={1} bg="white" height={[176, 280, 280]} />
