@@ -6,9 +6,9 @@ import { IconButton, Info, Close, Heading, Flex } from './primitives';
 
 const ShowInfoButton = styled(IconButton)`
   position: absolute;
-  right: ${props => props.theme.space[3]}px;
-  top: ${props => props.theme.space[3]}px;
-  padding: ${props => props.theme.space[2]}px;
+  right: 0;
+  top: 0;
+  padding: ${props => props.theme.space[3]}px;
 `;
 
 const StyledDialog = styled(Dialog)`
@@ -21,7 +21,7 @@ export const InfoButton = () => {
   return (
     <React.Fragment>
       <ShowInfoButton
-        color={['black', 'white']}
+        color="white"
         name="About"
         icon={<Info />}
         onClick={() => setVisibility(true)}

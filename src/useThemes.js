@@ -79,8 +79,8 @@ const variants = [
 ];
 
 export function useThemes() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [theme, setTheme] = useState(variants[0]);
+  const [activeIndex, setActiveIndex] = useState(1);
+  const [theme, setTheme] = useState(variants[1]);
 
   return [
     theme,

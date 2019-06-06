@@ -21,15 +21,15 @@ function App() {
   return (
     <ThemeProvider theme={{ ...theme, ...data.theme }}>
       <Container>
-        <InfoButton />
-        <ComponentGrid mx={[0, 0, 0, 3]} pt={[0, 4]}>
+        <ComponentGrid mx={[0, 0, 0, 3]}>
+          <InfoButton />
           <ComponentGrid.One>
             <TypographySwatch mb={3} />
-            <Card borderRadius={1} bg="white" height={[176, 280, 280]} />
+            <Card borderRadius={1} bg="white" height={[144, 280, 280]} />
           </ComponentGrid.One>
           <ComponentGrid.Two>
             <NavBar mb={3} />
-            <MediaCard {...data.media} height={[176, 328, 328]} mb={3} />
+            <MediaCard {...data.media} height={[144, 328, 328]} mb={3} />
             <SearchBar height={48} />
           </ComponentGrid.Two>
           <ComponentGrid.Three>

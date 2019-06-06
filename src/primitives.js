@@ -127,6 +127,7 @@ Container.defaultProps = {
   mx: 'auto',
   height: '100vh',
   maxWidth: 1184,
+  position: 'relative',
 };
 
 export const TransparentButton = styled(Button)`

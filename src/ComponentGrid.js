@@ -1,12 +1,14 @@
 import styled from '@emotion/styled';
-import { grid } from 'styled-system';
+import { grid, position } from 'styled-system';
 import { Card, Flex } from './primitives';
 
-export const ComponentGrid = styled(Card)(grid, {});
+export const ComponentGrid = styled(Card)(grid, {
+  position: 'relative',
+});
 
 ComponentGrid.defaultProps = {
   backgroundColor: 'tertiary',
-  alignContent: 'center',
+  alignContent: ['flex-end', 'center'],
   justifyItems: 'center',
   justifyContent: 'center',
   borderRadius: [0, 0, 0, 2],

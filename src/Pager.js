@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Box, Flex, IconButton } from './primitives';
+import { position } from 'styled-system';
 
 const Circle = ({ isActive, ...props }) => (
   <Box
@@ -23,8 +24,16 @@ const PagerItem = styled.li`
   line-height: 1;
 `;
 
+const PagerNav = styled(Box)({}, position);
+
+PagerNav.defaultProps = {
+  position: ['relative', 'relative', 'absolute'],
+  bottom: [0, 0, '32px'],
+  my: [3, 4, 0],
+};
+
 export const Pager = ({ active, onUpdate }) => (
-  <Box as="nav" aria-label="Theme Navigation" width="100%" mt={[2, 4]}>
+  <PagerNav as="nav" aria-label="Theme Navigation" width="100%">
     <Flex as="ul" alignItems="center" justifyContent="center" m={0} p={0}>
       <PagerItem>
         <IconButton
@@ -51,5 +60,5 @@ export const Pager = ({ active, onUpdate }) => (
         />
       </PagerItem>
     </Flex>
-  </Box>
+  </PagerNav>
 );
