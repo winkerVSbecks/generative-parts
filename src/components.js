@@ -9,7 +9,7 @@ import {
   Flex,
   Input,
   Image,
-  Button,
+  PrimaryButton,
 } from './primitives';
 import { ReactComponent as Menu } from './menu.svg';
 import { ReactComponent as Search } from './search.svg';
@@ -93,18 +93,44 @@ export const ProfileCard = ({ avatar, name, title, ...props }) => (
     bg="white"
     flexDirection={['row', 'column']}
     alignItems="center"
-    justifyContent="center"
+    justifyContent={['flex-start', 'center']}
+    pr={4}
+    pl={[0, 4]}
     {...props}
   >
-    <Image src={avatar} width={3} height={3} borderRadius="100%" />
-    <Box mt={3} justifyContent="center" flexDirection="column">
-      <Heading fontSize={2} color="black" textAlign="center" mb={2}>
+    <Image
+      src={avatar}
+      flex="none"
+      width={['auto', 3]}
+      height={['100%', 3]}
+      borderRadius={[0, '100%']}
+    />
+    <Box
+      width={['auto', '100%']}
+      mt={[0, 3]}
+      ml={[4, 0]}
+      justifyContent={['flex-end', 'center']}
+      flexDirection="column"
+    >
+      <Heading
+        fontSize={[3, 2]}
+        color="black"
+        textAlign={['left', 'center']}
+        mb={[1, 2]}
+      >
         {name}
       </Heading>
-      <Text fontSize={2} color="gray" textAlign="center" mb={2}>
+      <Text
+        fontSize={2}
+        color="gray"
+        textAlign={['left', 'center']}
+        mb={[3, 4]}
+      >
         {title}
       </Text>
-      <Button mx="auto">Follow</Button>
+      <PrimaryButton px={3} py={[2, 3]} width={[4, '100%']} mx="auto">
+        Follow
+      </PrimaryButton>
     </Box>
   </Card>
 );

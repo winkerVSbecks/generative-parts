@@ -39,7 +39,7 @@ Text.defaultProps = {
   mb: 0,
   mt: 0,
   fontFamily: 'inter',
-  lineHeight: 'body',
+  lineHeight: 'copy',
   color: 'gray',
 };
 
@@ -59,7 +59,6 @@ Heading.defaultProps = {
 export const Image = styled(Box)(
   {
     maxWidth: '100%',
-    height: 'auto',
   },
   border,
 );
@@ -67,6 +66,7 @@ export const Image = styled(Box)(
 Image.defaultProps = {
   as: 'img',
   m: 0,
+  height: 'auto',
 };
 
 export const BackgroundImage = styled.div(
@@ -113,7 +113,35 @@ Button.defaultProps = {
   border: 0,
 };
 
-export const Link = styled(Box)();
+export const PrimaryButton = styled(Button)({
+  display: 'block',
+  backfaceVisibility: 'hidden',
+  transform: 'translateZ(0)',
+  transition: 'transform .25s ease-out',
+  outline: 0,
+  ':hover,:focus': {
+    transform: 'scale( 1.05 )',
+  },
+  ':active': {
+    transform: 'scale( .90 )',
+  },
+});
+
+PrimaryButton.defaultProps = {
+  as: 'button',
+  border: 0,
+  backgroundColor: 'secondary',
+  borderRadius: 1,
+  color: 'primary',
+  fontSize: 1,
+  fontWeight: 6,
+};
+
+export const Link = styled(Box)(props => ({
+  ':hover': {
+    color: props.theme.colors.tertiary,
+  },
+}));
 
 Link.defaultProps = {
   as: 'a',
