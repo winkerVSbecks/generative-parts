@@ -4,12 +4,6 @@ body {
   background-color: black;
 }
 
-/* html {
-  font-family: 'Inter', sans-serif;
+[data-reach-dialog-overlay] {
+  z-index: 999;
 }
-
-@supports (font-variation-settings: normal) {
-  html {
-    font-family: 'Inter var', sans-serif;
-  }
-} */

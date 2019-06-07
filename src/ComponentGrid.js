@@ -17,7 +17,7 @@ ComponentGrid.defaultProps = {
   width: ['100%', '100%', '100%', 1184],
 };
 
-ComponentGrid.One = styled(Flex)();
+ComponentGrid.One = styled(Flex)({ zIndex: 1 });
 ComponentGrid.One.defaultProps = {
   flexDirection: 'column',
   mr: [2, 3, 3],
@@ -27,7 +27,7 @@ ComponentGrid.One.defaultProps = {
   flex: ['1 0 192px', 'none', 'none'],
 };
 
-ComponentGrid.Two = styled(Flex)();
+ComponentGrid.Two = styled(Flex)({ zIndex: 1 });
 ComponentGrid.Two.defaultProps = {
   flexDirection: 'column',
   width: ['100%', 384, 384],
@@ -35,7 +35,7 @@ ComponentGrid.Two.defaultProps = {
   ml: [2, 0, 0],
 };
 
-ComponentGrid.Three = styled(Flex)();
+ComponentGrid.Three = styled(Flex)({ zIndex: 1 });
 ComponentGrid.Three.defaultProps = {
   flexDirection: ['row', 'row', 'column'],
   width: ['100%', 640, 176],
