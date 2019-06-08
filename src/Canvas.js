@@ -23,20 +23,21 @@ export function Canvas({ profile, media, activeIndex, selectTheme }) {
   const [primaryRef, primaryDims] = useComponentDimensions();
   const [secondaryRef, secondaryDims] = useComponentDimensions();
 
-  console.log({
-    typeSwDims,
-    profileDims,
-    NavDims,
-    mediaDims,
-    SearchDims,
-    blackDims,
-    primaryDims,
-    secondaryDims,
-  });
-
   return (
     <ComponentGrid mx={[0, 0, 0, 3]}>
-      <RayCaster />
+      <RayCaster
+        {...{
+          typeSwDims,
+          profileDims,
+          NavDims,
+          mediaDims,
+          SearchDims,
+          blackDims,
+          primaryDims,
+          secondaryDims,
+        }}
+      />
+      <InfoButton />
 
       <ComponentGrid.One>
         <TypographySwatch ref={typeSwRef} mb={3} />
@@ -67,7 +68,6 @@ export function Canvas({ profile, media, activeIndex, selectTheme }) {
         <ColorSwatch ref={secondaryRef} name="secondary" flex="1 1 146.67px" />
       </ComponentGrid.Three>
 
-      <InfoButton />
       <Pager active={activeIndex} onUpdate={selectTheme} />
     </ComponentGrid>
   );
