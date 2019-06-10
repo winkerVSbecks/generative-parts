@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { withTheme } from 'emotion-theming';
 import { RayCasterEngine } from './ray-caster-engine';
+import { useWindowMousePosition } from './useMousePosition';
 
 export const RayCasterDebug = styled.canvas`
   position: fixed;
@@ -35,16 +36,23 @@ function useRayCasterDebug(
   color,
 ) {
   const canvasRef = useRef(null);
-  const rayCasterEngine = RayCasterEngine(width, height, {
-    typeSw,
-    profile,
-    nav,
-    media,
-    search,
-    black,
-    primary,
-    secondary,
-  });
+  let { x, y } = useWindowMousePosition();
+
+  const rayCasterEngine = RayCasterEngine(
+    width,
+    height,
+    {
+      typeSw,
+      profile,
+      nav,
+      media,
+      search,
+      black,
+      primary,
+      secondary,
+    },
+    { x, y },
+  );
 
   useEffect(() => {
     if (canvasRef.current) {

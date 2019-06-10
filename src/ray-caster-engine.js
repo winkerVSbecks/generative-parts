@@ -1,5 +1,9 @@
 import Vector, { createVector, toRadians } from './vector';
 
+/**
+ * Boundary
+ * Surfaces that interact with light rays
+ */
 function createBoundary([x1, y1], [x2, y2]) {
   const a = createVector(x1, y1);
   const b = createVector(x2, y2);
@@ -17,6 +21,9 @@ function createBoundary([x1, y1], [x2, y2]) {
   };
 }
 
+/**
+ * Light Ray
+ */
 function createRay(position, angle, limit) {
   const dir = Vector.fromAngle(angle);
 
@@ -26,11 +33,11 @@ function createRay(position, angle, limit) {
       dir.y = y - position.y;
       dir.normalize();
     },
-    cast(wall) {
-      const x1 = wall.a.x;
-      const y1 = wall.a.y;
-      const x2 = wall.b.x;
-      const y2 = wall.b.y;
+    cast(surface) {
+      const x1 = surface.a.x;
+      const y1 = surface.a.y;
+      const x2 = surface.b.x;
+      const y2 = surface.b.y;
 
       const x3 = position.x;
       const y3 = position.y;
@@ -62,6 +69,11 @@ function createRay(position, angle, limit) {
   };
 }
 
+/**
+ * Light Source
+ * Generates rays in 360° and then casts
+ * them onto the surfaces
+ */
 function createLight(x, y, limit) {
   const position = createVector(x, y);
 
@@ -71,15 +83,16 @@ function createLight(x, y, limit) {
 
   return {
     rays,
-    look(walls, context) {
-      for (let i = 0; i < rays.length; i++) {
-        const ray = rays[i];
+    look(surfaces, context) {
+      rays.forEach(ray => {
         let closest = null;
         let record = Infinity;
-        for (let wall of walls) {
-          const pt = ray.cast(wall);
+        for (let surface of surfaces) {
+          const pt = ray.cast(surface);
+
           if (pt) {
-            const d = Vector.dist(this.pos, pt);
+            const d = position.dist(pt);
+
             if (d < record) {
               record = d;
               closest = pt;
@@ -93,7 +106,7 @@ function createLight(x, y, limit) {
           context.lineTo(closest.x, closest.y);
           context.stroke();
         }
-      }
+      });
     },
     draw(context) {
       context.lineWidth = 1;
@@ -108,8 +121,9 @@ export function RayCasterEngine(
   width = 0,
   height = 0,
   { typeSw, profile, nav, media, search, black, primary, secondary },
+  { x = width * 0.8, y = height * 0.15 },
 ) {
-  const light = createLight(width * 0.6, height * 0.1, Math.max(width, height));
+  const light = createLight(x, y, Math.max(width, height));
   const p = 4; // padding
   const surfaces = [
     typeSw,
@@ -132,9 +146,9 @@ export function RayCasterEngine(
 
   return {
     draw(context) {
-      // light.rays.forEach(ray => ray.draw(context));
-      light.draw(context);
       surfaces.forEach(surface => surface.draw(context));
+      light.draw(context);
+      light.look(surfaces, context);
     },
   };
 }

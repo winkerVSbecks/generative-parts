@@ -1,4 +1,9 @@
-export default function Vector(x, y, z) {
+/**
+ * P5 Vector
+ * from:
+ * https://github.com/processing/p5.js/blob/0.8.0/src/math/p5.Vector.js#L12
+ */
+export default function Vector(x, y, z = 0) {
   this.x = x;
   this.y = y;
   this.z = z;
@@ -28,11 +33,7 @@ Vector.prototype.set = function set(x, y, z) {
 };
 
 Vector.prototype.copy = function copy() {
-  if (this.p5) {
-    return new Vector(this.p5, [this.x, this.y, this.z]);
-  } else {
-    return new Vector(this.x, this.y, this.z);
-  }
+  return new Vector(this.x, this.y, this.z);
 };
 
 Vector.prototype.add = function add(x, y, z) {
@@ -127,11 +128,7 @@ Vector.prototype.cross = function cross(v) {
   var x = this.y * v.z - this.z * v.y;
   var y = this.z * v.x - this.x * v.z;
   var z = this.x * v.y - this.y * v.x;
-  if (this.p5) {
-    return new Vector(this.p5, [x, y, z]);
-  } else {
-    return new Vector(x, y, z);
-  }
+  return new Vector(x, y, z);
 };
 
 Vector.prototype.dist = function dist(v) {
