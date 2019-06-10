@@ -22,6 +22,7 @@ export function Canvas({ profile, media, activeIndex, selectTheme }) {
   const [blackRef, blackDims] = useComponentDimensions();
   const [primaryRef, primaryDims] = useComponentDimensions();
   const [secondaryRef, secondaryDims] = useComponentDimensions();
+  console.log(typeSwDims.x);
 
   return (
     <ComponentGrid mx={[0, 0, 0, 3]}>

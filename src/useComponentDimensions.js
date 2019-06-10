@@ -11,6 +11,7 @@ function getSize(el) {
   }
 
   const { x, y, width, height } = el.getBoundingClientRect();
+  console.log(el, { x, y, width, height });
 
   return {
     x,

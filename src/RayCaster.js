@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import canvasSketch from 'canvas-sketch';
 
@@ -14,7 +14,7 @@ export const RayCasterDebug = styled.canvas`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-function useRayCasterDebug({
+export const RayCaster = ({
   typeSwDims,
   profileDims,
   NavDims,
@@ -23,22 +23,54 @@ function useRayCasterDebug({
   blackDims,
   primaryDims,
   secondaryDims,
-}) {
+}) => {
+  const size = useWindowSize();
+
+  const canvasRef = useRayCasterDebug(size, {
+    typeSwDims,
+    profileDims,
+    NavDims,
+    mediaDims,
+    SearchDims,
+    blackDims,
+    primaryDims,
+    secondaryDims,
+  });
+  console.log(typeSwDims.x, typeSwDims.y);
+
+  return (
+    <React.Fragment>
+      <RayCasterDebug ref={canvasRef} />
+    </React.Fragment>
+  );
+};
+
+function useRayCasterDebug(
+  { width, height },
+  {
+    typeSwDims,
+    profileDims,
+    NavDims,
+    mediaDims,
+    SearchDims,
+    blackDims,
+    primaryDims,
+    secondaryDims,
+  },
+) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
     if (canvasRef.current) {
-      canvasRef.current.width = window.innerWidth * 2;
-      canvasRef.current.height = window.innerHeight * 2;
-      canvasRef.current.style.width = `${window.innerWidth}px`;
-      canvasRef.current.style.height = `${window.innerHeight}px`;
-      console.log(window.innerWidth, window.innerHeight);
+      canvasRef.current.width = width * 2;
+      canvasRef.current.height = height * 2;
+      canvasRef.current.style.width = `${width}px`;
+      canvasRef.current.style.height = `${height}px`;
 
       const context = canvasRef.current.getContext('2d');
-
       context.scale(2, 2);
-      // context.fillStyle = 'pink';
-      // context.fillRect(0, 0, 50, 50);
+
+      context.clearRect(0, 0, width, height);
 
       context.strokeStyle = 'black';
       context.lineWidth = 4;
@@ -64,30 +96,30 @@ function useRayCasterDebug({
   return canvasRef;
 }
 
-export const RayCaster = ({
-  typeSwDims,
-  profileDims,
-  NavDims,
-  mediaDims,
-  SearchDims,
-  blackDims,
-  primaryDims,
-  secondaryDims,
-}) => {
-  const canvasRef = useRayCasterDebug({
-    typeSwDims,
-    profileDims,
-    NavDims,
-    mediaDims,
-    SearchDims,
-    blackDims,
-    primaryDims,
-    secondaryDims,
-  });
+function useWindowSize() {
+  const isClient = typeof window === 'object';
 
-  return (
-    <React.Fragment>
-      <RayCasterDebug ref={canvasRef} />
-    </React.Fragment>
-  );
-};
+  function getSize() {
+    return {
+      width: isClient ? window.innerWidth : undefined,
+      height: isClient ? window.innerHeight : undefined,
+    };
+  }
+
+  const [windowSize, setWindowSize] = useState(getSize);
+
+  useEffect(() => {
+    if (!isClient) {
+      return false;
+    }
+
+    function handleResize() {
+      setWindowSize(getSize());
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []); // Empty array ensures that effect is only run on mount and unmount
+
+  return windowSize;
+}
