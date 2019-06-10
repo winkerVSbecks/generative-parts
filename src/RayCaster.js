@@ -66,6 +66,7 @@ function useRayCasterDebug(
       context.clearRect(0, 0, width, height);
 
       context.strokeStyle = color;
+      context.fillStyle = color;
       rayCasterEngine.draw(context);
     }
 

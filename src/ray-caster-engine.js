@@ -82,39 +82,44 @@ function createLight(x, y, limit) {
   );
 
   return {
+    position,
     rays,
-    look(surfaces, context) {
-      rays.forEach(ray => {
-        let closest = null;
-        let record = Infinity;
-        for (let surface of surfaces) {
-          const pt = ray.cast(surface);
-
-          if (pt) {
-            const d = position.dist(pt);
-
-            if (d < record) {
-              record = d;
-              closest = pt;
-            }
-          }
-        }
-        if (closest) {
-          context.lineWidth = 1;
-          context.beginPath();
-          context.moveTo(position.x, position.y);
-          context.lineTo(closest.x, closest.y);
-          context.stroke();
-        }
-      });
-    },
     draw(context) {
       context.lineWidth = 1;
       context.beginPath();
       context.ellipse(position.x, position.y, 5, 5, 0, 0, 2 * Math.PI);
-      context.stroke();
+      context.fill();
     },
   };
+}
+
+function look({ rays, position }, surfaces) {
+  return rays.reduce((acc, ray) => {
+    let closest = null;
+    let record = Infinity;
+
+    surfaces.forEach(surface => {
+      const pt = ray.cast(surface);
+
+      if (pt) {
+        const d = position.dist(pt);
+
+        if (d < record) {
+          record = d;
+          closest = pt;
+        }
+      }
+    });
+
+    return closest
+      ? acc.concat([
+          {
+            a: [position.x, position.y],
+            b: [closest.x, closest.y],
+          },
+        ])
+      : acc;
+  }, []);
 }
 
 export function RayCasterEngine(
@@ -148,7 +153,12 @@ export function RayCasterEngine(
     draw(context) {
       surfaces.forEach(surface => surface.draw(context));
       light.draw(context);
-      light.look(surfaces, context);
+      look(light, surfaces).forEach(({ a, b }) => {
+        context.beginPath();
+        context.moveTo(...a);
+        context.lineTo(...b);
+        context.stroke();
+      });
     },
   };
 }
