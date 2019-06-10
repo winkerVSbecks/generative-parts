@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   TypographySwatch,
   ColorSwatch,
@@ -11,33 +11,32 @@ import { ComponentGrid } from './ComponentGrid';
 import { Pager } from './Pager';
 import { InfoButton } from './Info';
 import { RayCaster } from './RayCaster';
-import { useComponentDimensions } from './useComponentDimensions';
+import { useDimensions } from './useDimensions';
 
 export function Canvas({ profile, media, activeIndex, selectTheme }) {
-  const [typeSwRef, typeSwDims] = useComponentDimensions();
-  const [profileRef, profileDims] = useComponentDimensions();
-  const [NavRef, NavDims] = useComponentDimensions();
-  const [mediaRef, mediaDims] = useComponentDimensions();
-  const [SearchRef, SearchDims] = useComponentDimensions();
-  const [blackRef, blackDims] = useComponentDimensions();
-  const [primaryRef, primaryDims] = useComponentDimensions();
-  const [secondaryRef, secondaryDims] = useComponentDimensions();
-  console.log(typeSwDims.x);
+  const typeSwRef = useRef(null);
+  const profileRef = useRef(null);
+  const navRef = useRef(null);
+  const mediaRef = useRef(null);
+  const searchRef = useRef(null);
+  const blackRef = useRef(null);
+  const primaryRef = useRef(null);
+  const secondaryRef = useRef(null);
+
+  const [windowDims, surfaceDims] = useDimensions(
+    typeSwRef,
+    profileRef,
+    navRef,
+    mediaRef,
+    searchRef,
+    blackRef,
+    primaryRef,
+    secondaryRef,
+  );
 
   return (
     <ComponentGrid mx={[0, 0, 0, 3]}>
-      <RayCaster
-        {...{
-          typeSwDims,
-          profileDims,
-          NavDims,
-          mediaDims,
-          SearchDims,
-          blackDims,
-          primaryDims,
-          secondaryDims,
-        }}
-      />
+      <RayCaster windowDims={windowDims} surfaceDims={surfaceDims} />
       <InfoButton />
 
       <ComponentGrid.One>
@@ -46,9 +45,9 @@ export function Canvas({ profile, media, activeIndex, selectTheme }) {
       </ComponentGrid.One>
 
       <ComponentGrid.Two>
-        <NavBar ref={NavRef} mb={3} />
+        <NavBar ref={navRef} mb={3} />
         <MediaCard ref={mediaRef} {...media} height={[144, 328, 328]} mb={3} />
-        <SearchBar ref={SearchRef} height={48} />
+        <SearchBar ref={searchRef} height={48} />
       </ComponentGrid.Two>
 
       <ComponentGrid.Three>
