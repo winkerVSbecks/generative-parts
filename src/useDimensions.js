@@ -29,7 +29,7 @@ export function useDimensions(
         media: mediaRef.current
           ? mediaRef.current.getBoundingClientRect()
           : null,
-        Search: searchRef.current
+        search: searchRef.current
           ? searchRef.current.getBoundingClientRect()
           : null,
         black: blackRef.current

@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { withTheme } from 'emotion-theming';
+import { RayCasterEngine } from './ray-caster-engine';
 
 export const RayCasterDebug = styled.canvas`
   position: fixed;
@@ -30,10 +31,20 @@ export const RayCaster = withTheme(({ windowDims, surfaceDims, theme }) => {
 
 function useRayCasterDebug(
   { width, height },
-  { typeSw, profile, nav, media, Search, black, primary, secondary },
+  { typeSw, profile, nav, media, search, black, primary, secondary },
   color,
 ) {
   const canvasRef = useRef(null);
+  const rayCasterEngine = RayCasterEngine(width, height, {
+    typeSw,
+    profile,
+    nav,
+    media,
+    search,
+    black,
+    primary,
+    secondary,
+  });
 
   useEffect(() => {
     if (canvasRef.current) {
@@ -46,20 +57,8 @@ function useRayCasterDebug(
       context.scale(2, 2);
       context.clearRect(0, 0, width, height);
 
-      const padding = 4;
-
       context.strokeStyle = color;
-      context.lineWidth = 2;
-      [typeSw, profile, nav, media, Search, black, primary, secondary]
-        .filter(x => x)
-        .forEach(surface => {
-          context.strokeRect(
-            surface.x - padding,
-            surface.y - padding,
-            surface.width + padding * 2,
-            surface.height + padding * 2,
-          );
-        });
+      rayCasterEngine.draw(context);
     }
 
     return () => {
