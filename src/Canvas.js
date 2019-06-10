@@ -34,9 +34,20 @@ export function Canvas({ profile, media, activeIndex, selectTheme }) {
     secondaryRef,
   );
 
+  const surfaces = [
+    { name: 'typeSw', dims: surfaceDims.typeSw },
+    { name: 'profile', dims: surfaceDims.profile },
+    { name: 'nav', dims: surfaceDims.nav },
+    { name: 'media', dims: surfaceDims.media },
+    { name: 'search', dims: surfaceDims.search },
+    { name: 'black', dims: surfaceDims.black },
+    { name: 'primary', dims: surfaceDims.primary },
+    { name: 'secondary', dims: surfaceDims.secondary },
+  ];
+
   return (
     <ComponentGrid mx={[0, 0, 0, 3]}>
-      <RayCaster windowDims={windowDims} surfaceDims={surfaceDims} />
+      <RayCaster windowDims={windowDims} surfaces={surfaces} />
       <InfoButton />
 
       <ComponentGrid.One>

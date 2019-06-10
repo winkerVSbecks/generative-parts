@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { grid, position } from 'styled-system';
+import { grid } from 'styled-system';
 import { Card, Flex } from './primitives';
 
 export const ComponentGrid = styled(Card)(grid, {

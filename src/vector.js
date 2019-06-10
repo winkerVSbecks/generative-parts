@@ -162,7 +162,6 @@ Vector.prototype.setMag = function setMag(n) {
 Vector.prototype.heading = function heading() {
   var h = Math.atan2(this.y, this.x);
   return fromRadians(h);
-  return h;
 };
 
 Vector.prototype.rotate = function rotate(a) {

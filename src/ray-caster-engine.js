@@ -4,13 +4,14 @@ import Vector, { createVector, toRadians } from './vector';
  * Boundary
  * Surfaces that interact with light rays
  */
-function createBoundary([x1, y1], [x2, y2]) {
+function createBoundary([x1, y1], [x2, y2], type) {
   const a = createVector(x1, y1);
   const b = createVector(x2, y2);
 
   return {
     a,
     b,
+    type,
     draw(context) {
       context.lineWidth = 2;
       context.beginPath();
@@ -96,6 +97,7 @@ function createLight(x, y, limit) {
 function look({ rays, position }, surfaces) {
   return rays.reduce((acc, ray) => {
     let closest = null;
+    let closestSurface = null;
     let record = Infinity;
 
     surfaces.forEach(surface => {
@@ -107,6 +109,7 @@ function look({ rays, position }, surfaces) {
         if (d < record) {
           record = d;
           closest = pt;
+          closestSurface = surface;
         }
       }
     });
@@ -116,6 +119,7 @@ function look({ rays, position }, surfaces) {
           {
             a: [position.x, position.y],
             b: [closest.x, closest.y],
+            type: closestSurface.type,
           },
         ])
       : acc;
@@ -125,40 +129,40 @@ function look({ rays, position }, surfaces) {
 export function RayCasterEngine(
   width = 0,
   height = 0,
-  { typeSw, profile, nav, media, search, black, primary, secondary },
+  surfaces = [],
   { x = width * 0.8, y = height * 0.15 },
 ) {
   const light = createLight(x, y, Math.max(width, height));
   const p = 4; // padding
-  const surfaces = [
-    typeSw,
-    profile,
-    nav,
-    media,
-    search,
-    black,
-    primary,
-    secondary,
-  ]
-    .filter(x => x)
-    .map(({ top: t, left: l, bottom: b, right: r }) => [
-      createBoundary([l - p, t - p], [r + p, t - p]),
-      createBoundary([r + p, t - p], [r + p, b + p]),
-      createBoundary([r + p, b + p], [l - p, b + p]),
-      createBoundary([l - p, b + p], [l - p, t - p]),
+
+  const boundaries = surfaces
+    .filter(s => s.dims)
+    .map(({ dims: { top: t, left: l, bottom: b, right: r } = {}, name }) => [
+      createBoundary([l - p, t - p], [r + p, t - p], name),
+      createBoundary([r + p, t - p], [r + p, b + p], name),
+      createBoundary([r + p, b + p], [l - p, b + p], name),
+      createBoundary([l - p, b + p], [l - p, t - p], name),
     ])
     .flat();
 
   return {
     draw(context) {
-      surfaces.forEach(surface => surface.draw(context));
+      boundaries.forEach(boundary => boundary.draw(context));
       light.draw(context);
-      look(light, surfaces).forEach(({ a, b }) => {
+      const interactions = look(light, boundaries);
+
+      interactions.forEach(({ a, b }) => {
         context.beginPath();
         context.moveTo(...a);
         context.lineTo(...b);
         context.stroke();
       });
+
+      return interactions.reduce((acc, ray) => {
+        if (!acc[ray.type]) acc[ray.type] = 0;
+        acc[ray.type] += 1 / 360;
+        return acc;
+      }, {});
     },
   };
 }

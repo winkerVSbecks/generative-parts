@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { withTheme } from 'emotion-theming';
 import { RayCasterEngine } from './ray-caster-engine';
@@ -16,10 +16,10 @@ export const RayCasterDebug = styled.canvas`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-export const RayCaster = withTheme(({ windowDims, surfaceDims, theme }) => {
-  const canvasRef = useRayCasterDebug(
+export const RayCaster = withTheme(({ windowDims, surfaces, theme }) => {
+  const [canvasRef, lightVolumes] = useRayCaster(
     windowDims,
-    surfaceDims,
+    surfaces,
     theme.colors.primary,
   );
 
@@ -30,29 +30,12 @@ export const RayCaster = withTheme(({ windowDims, surfaceDims, theme }) => {
   );
 });
 
-function useRayCasterDebug(
-  { width, height },
-  { typeSw, profile, nav, media, search, black, primary, secondary },
-  color,
-) {
+function useRayCaster({ width, height }, surfaces, color) {
   const canvasRef = useRef(null);
+  const [lightVolumes, setLightVolumes] = useState({});
   let { x, y } = useWindowMousePosition();
 
-  const rayCasterEngine = RayCasterEngine(
-    width,
-    height,
-    {
-      typeSw,
-      profile,
-      nav,
-      media,
-      search,
-      black,
-      primary,
-      secondary,
-    },
-    { x, y },
-  );
+  const rayCasterEngine = RayCasterEngine(width, height, surfaces, { x, y });
 
   useEffect(() => {
     if (canvasRef.current) {
@@ -67,7 +50,7 @@ function useRayCasterDebug(
 
       context.strokeStyle = color;
       context.fillStyle = color;
-      rayCasterEngine.draw(context);
+      setLightVolumes(rayCasterEngine.draw(context));
     }
 
     return () => {
@@ -75,5 +58,5 @@ function useRayCasterDebug(
     };
   });
 
-  return canvasRef;
+  return [canvasRef, lightVolumes];
 }

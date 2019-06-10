@@ -65,6 +65,7 @@ export function useDimensions(
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
+    // eslint-disable-next-line
   }, [
     typeSwRef.current,
     profileRef.current,
