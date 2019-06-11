@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { withTheme } from 'emotion-theming';
+import chroma from 'chroma-js';
 import {
   TypographySwatch,
   ColorSwatch,
@@ -36,17 +37,6 @@ function Canvas({ profile, media, activeIndex, selectTheme, theme }) {
     secondaryRef,
   );
 
-  // const surfaces = [
-  //   { name: 'typeSw', dims: surfaceDims.typeSw },
-  //   { name: 'profile', dims: surfaceDims.profile },
-  //   { name: 'nav', dims: surfaceDims.nav },
-  //   { name: 'media', dims: surfaceDims.media },
-  //   { name: 'search', dims: surfaceDims.search },
-  //   { name: 'black', dims: surfaceDims.black },
-  //   { name: 'primary', dims: surfaceDims.primary },
-  //   { name: 'secondary', dims: surfaceDims.secondary },
-  // ];
-
   const lightVolumes = useRayCasterEngine(
     windowDims,
     surfaceDims,
@@ -60,19 +50,43 @@ function Canvas({ profile, media, activeIndex, selectTheme, theme }) {
       <InfoButton />
 
       <ComponentGrid.One>
-        <TypographySwatch ref={typeSwRef} mb={3} />
-        <ProfileCard ref={profileRef} {...profile} height={[144, 280, 280]} />
+        <TypographySwatch
+          ref={typeSwRef}
+          style={lightToColor(lightVolumes.typeSw, theme.colors)}
+          mb={3}
+        />
+        <ProfileCard
+          ref={profileRef}
+          style={lightToColor(lightVolumes.profile, theme.colors)}
+          {...profile}
+          height={[144, 280, 280]}
+        />
       </ComponentGrid.One>
 
       <ComponentGrid.Two>
-        <NavBar ref={navRef} mb={3} />
-        <MediaCard ref={mediaRef} {...media} height={[144, 328, 328]} mb={3} />
-        <SearchBar ref={searchRef} height={48} />
+        <NavBar
+          ref={navRef}
+          style={lightToColor(lightVolumes.nav, theme.colors)}
+          mb={3}
+        />
+        <MediaCard
+          ref={mediaRef}
+          style={lightToColor(lightVolumes.media, theme.colors)}
+          {...media}
+          height={[144, 328, 328]}
+          mb={3}
+        />
+        <SearchBar
+          ref={searchRef}
+          style={lightToColor(lightVolumes.search, theme.colors)}
+          height={48}
+        />
       </ComponentGrid.Two>
 
       <ComponentGrid.Three>
         <ColorSwatch
           ref={blackRef}
+          style={lightToColor(lightVolumes.black, theme.colors)}
           name="black"
           flex="1 1 146.67px"
           mb={[0, 0, 3]}
@@ -80,12 +94,18 @@ function Canvas({ profile, media, activeIndex, selectTheme, theme }) {
         />
         <ColorSwatch
           ref={primaryRef}
+          style={lightToColor(lightVolumes.primary, theme.colors)}
           name="primary"
           flex="1 1 146.67px"
           mb={[0, 0, 3]}
           mr={[3, 3, 0]}
         />
-        <ColorSwatch ref={secondaryRef} name="secondary" flex="1 1 146.67px" />
+        <ColorSwatch
+          ref={secondaryRef}
+          style={lightToColor(lightVolumes.secondary, theme.colors)}
+          name="secondary"
+          flex="1 1 146.67px"
+        />
       </ComponentGrid.Three>
 
       <Pager active={activeIndex} onUpdate={selectTheme} />
@@ -94,3 +114,34 @@ function Canvas({ profile, media, activeIndex, selectTheme, theme }) {
 }
 
 export default withTheme(Canvas);
+
+function lightToColor(lightVolume, colors) {
+  return !lightVolume
+    ? {
+        '--material-white': 'rgba(255, 255, 255, 1)',
+      }
+    : {
+        '--material-white': chroma
+          .mix(
+            colors.tertiary,
+            'white',
+            mapRange(lightVolume, 0, 1, 0.5, 1),
+            'hsl',
+          )
+          // .blend(colors.primary, 'multiply')
+          .css(),
+      };
+  // : {
+  //     '--material-white': `rgba(255, 255, 255, ${mapRange(
+  //       lightVolume,
+  //       0,
+  //       1,
+  //       0.75,
+  //       1,
+  //     )})`,
+  //   };
+}
+
+function mapRange(n, start1, stop1, start2, stop2) {
+  return ((n - start1) / (stop1 - start1)) * (stop2 - start2) + start2;
+}

@@ -178,13 +178,13 @@ export function useRayCasterEngine(
 
     const interactions = look(light, boundaries);
 
-    setLightVolumes({
-      lightVolumes: interactions.reduce((acc, ray) => {
+    setLightVolumes(
+      interactions.reduce((acc, ray) => {
         if (!acc[ray.type]) acc[ray.type] = 0;
         acc[ray.type] += 1 / 360;
         return acc;
       }, {}),
-    });
+    );
 
     canvasRef.current.width = width * 2;
     canvasRef.current.height = height * 2;
