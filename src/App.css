@@ -7,3 +7,7 @@ body {
 [data-reach-dialog-overlay] {
   z-index: 999;
 }
+
+:root {
+  --material-white: #fff;
+}

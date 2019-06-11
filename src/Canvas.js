@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { withTheme } from 'emotion-theming';
 import {
   TypographySwatch,
   ColorSwatch,
@@ -10,10 +11,10 @@ import {
 import { ComponentGrid } from './ComponentGrid';
 import { Pager } from './Pager';
 import { InfoButton } from './Info';
-import { RayCaster } from './RayCaster';
 import { useDimensions } from './useDimensions';
+import { useRayCasterEngine, RayCasterDebug } from './ray-caster-engine';
 
-export function Canvas({ profile, media, activeIndex, selectTheme }) {
+function Canvas({ profile, media, activeIndex, selectTheme, theme }) {
   const typeSwRef = useRef(null);
   const profileRef = useRef(null);
   const navRef = useRef(null);
@@ -22,6 +23,7 @@ export function Canvas({ profile, media, activeIndex, selectTheme }) {
   const blackRef = useRef(null);
   const primaryRef = useRef(null);
   const secondaryRef = useRef(null);
+  const canvasRef = useRef(null);
 
   const [windowDims, surfaceDims] = useDimensions(
     typeSwRef,
@@ -34,20 +36,27 @@ export function Canvas({ profile, media, activeIndex, selectTheme }) {
     secondaryRef,
   );
 
-  const surfaces = [
-    { name: 'typeSw', dims: surfaceDims.typeSw },
-    { name: 'profile', dims: surfaceDims.profile },
-    { name: 'nav', dims: surfaceDims.nav },
-    { name: 'media', dims: surfaceDims.media },
-    { name: 'search', dims: surfaceDims.search },
-    { name: 'black', dims: surfaceDims.black },
-    { name: 'primary', dims: surfaceDims.primary },
-    { name: 'secondary', dims: surfaceDims.secondary },
-  ];
+  // const surfaces = [
+  //   { name: 'typeSw', dims: surfaceDims.typeSw },
+  //   { name: 'profile', dims: surfaceDims.profile },
+  //   { name: 'nav', dims: surfaceDims.nav },
+  //   { name: 'media', dims: surfaceDims.media },
+  //   { name: 'search', dims: surfaceDims.search },
+  //   { name: 'black', dims: surfaceDims.black },
+  //   { name: 'primary', dims: surfaceDims.primary },
+  //   { name: 'secondary', dims: surfaceDims.secondary },
+  // ];
+
+  const lightVolumes = useRayCasterEngine(
+    windowDims,
+    surfaceDims,
+    canvasRef,
+    theme.colors.primary,
+  );
 
   return (
     <ComponentGrid mx={[0, 0, 0, 3]}>
-      <RayCaster windowDims={windowDims} surfaces={surfaces} />
+      <RayCasterDebug ref={canvasRef} />
       <InfoButton />
 
       <ComponentGrid.One>
@@ -83,3 +92,5 @@ export function Canvas({ profile, media, activeIndex, selectTheme }) {
     </ComponentGrid>
   );
 }
+
+export default withTheme(Canvas);

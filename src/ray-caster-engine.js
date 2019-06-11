@@ -1,4 +1,26 @@
+import React, { useState, useEffect } from 'react';
+import styled from '@emotion/styled';
 import Vector, { createVector, toRadians } from './vector';
+import { useWindowMousePosition } from './useMousePosition';
+
+export const RayCasterDebug = styled.canvas`
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+`;
+
+// export const RayCaster = withTheme(
+//   ({ windowDims, theme, boundaries, light, interactions }) => {
+
+//     return ;
+//   },
+// );
 
 /**
  * Boundary
@@ -126,30 +148,59 @@ function look({ rays, position }, surfaces) {
   }, []);
 }
 
-export function RayCasterEngine(
-  width = 0,
-  height = 0,
-  surfaces = [],
-  { x = width * 0.8, y = height * 0.15 },
+export function useRayCasterEngine(
+  { width = 0, height = 0 },
+  surfaceDims,
+  canvasRef,
+  color = 'white',
 ) {
-  const light = createLight(x, y, Math.max(width, height));
-  const p = 4; // padding
+  const [lightVolumes, setLightVolumes] = useState({});
+  let { x, y } = useWindowMousePosition();
 
-  const boundaries = surfaces
-    .filter(s => s.dims)
-    .map(({ dims: { top: t, left: l, bottom: b, right: r } = {}, name }) => [
-      createBoundary([l - p, t - p], [r + p, t - p], name),
-      createBoundary([r + p, t - p], [r + p, b + p], name),
-      createBoundary([r + p, b + p], [l - p, b + p], name),
-      createBoundary([l - p, b + p], [l - p, t - p], name),
-    ])
-    .flat();
+  useEffect(() => {
+    const light = createLight(x, y, Math.max(width, height));
+    const p = 4; // padding
 
-  return {
-    draw(context) {
+    const surfaces = Object.keys(surfaceDims).map(name => ({
+      name,
+      dims: surfaceDims[name],
+    }));
+
+    const boundaries = surfaces
+      .filter(s => s.dims)
+      .map(({ dims: { top: t, left: l, bottom: b, right: r } = {}, name }) => [
+        createBoundary([l - p, t - p], [r + p, t - p], name),
+        createBoundary([r + p, t - p], [r + p, b + p], name),
+        createBoundary([r + p, b + p], [l - p, b + p], name),
+        createBoundary([l - p, b + p], [l - p, t - p], name),
+      ])
+      .flat();
+
+    const interactions = look(light, boundaries);
+
+    setLightVolumes({
+      lightVolumes: interactions.reduce((acc, ray) => {
+        if (!acc[ray.type]) acc[ray.type] = 0;
+        acc[ray.type] += 1 / 360;
+        return acc;
+      }, {}),
+    });
+
+    canvasRef.current.width = width * 2;
+    canvasRef.current.height = height * 2;
+    canvasRef.current.style.width = `${width}px`;
+    canvasRef.current.style.height = `${height}px`;
+
+    const context = canvasRef.current.getContext('2d');
+    context.scale(2, 2);
+    context.clearRect(0, 0, width, height);
+
+    context.strokeStyle = color;
+    context.fillStyle = color;
+
+    if (boundaries) {
       boundaries.forEach(boundary => boundary.draw(context));
       light.draw(context);
-      const interactions = look(light, boundaries);
 
       interactions.forEach(({ a, b }) => {
         context.beginPath();
@@ -157,12 +208,8 @@ export function RayCasterEngine(
         context.lineTo(...b);
         context.stroke();
       });
+    }
+  }, [width, height, surfaceDims, x, y, canvasRef, color]);
 
-      return interactions.reduce((acc, ray) => {
-        if (!acc[ray.type]) acc[ray.type] = 0;
-        acc[ray.type] += 1 / 360;
-        return acc;
-      }, {});
-    },
-  };
+  return lightVolumes;
 }

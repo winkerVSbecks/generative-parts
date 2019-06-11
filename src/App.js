@@ -4,7 +4,7 @@ import './App.css';
 import theme from './theme';
 import { Container } from './primitives';
 import { useThemes } from './useThemes';
-import { Canvas } from './Canvas';
+import Canvas from './Canvas';
 
 function App() {
   const [data, activeIndex, selectTheme] = useThemes();

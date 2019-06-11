@@ -1,8 +1,6 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 import { withTheme } from 'emotion-theming';
-import { RayCasterEngine } from './ray-caster-engine';
-import { useWindowMousePosition } from './useMousePosition';
 
 export const RayCasterDebug = styled.canvas`
   position: fixed;
@@ -16,26 +14,29 @@ export const RayCasterDebug = styled.canvas`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-export const RayCaster = withTheme(({ windowDims, surfaces, theme }) => {
-  const [canvasRef, lightVolumes] = useRayCaster(
-    windowDims,
-    surfaces,
-    theme.colors.primary,
-  );
+export const RayCaster = withTheme(
+  ({ windowDims, theme, boundaries, light, interactions }) => {
+    const canvasRef = useDrawRayCaster(
+      windowDims,
+      theme.colors.primary,
+      boundaries,
+      light,
+      interactions,
+      // drawRayCaster,
+    );
 
-  return (
-    <React.Fragment>
-      <RayCasterDebug ref={canvasRef} />
-    </React.Fragment>
-  );
-});
+    return <RayCasterDebug ref={canvasRef} />;
+  },
+);
 
-function useRayCaster({ width, height }, surfaces, color) {
+function useDrawRayCaster(
+  { width, height },
+  color,
+  boundaries,
+  light,
+  interactions,
+) {
   const canvasRef = useRef(null);
-  const [lightVolumes, setLightVolumes] = useState({});
-  let { x, y } = useWindowMousePosition();
-
-  const rayCasterEngine = RayCasterEngine(width, height, surfaces, { x, y });
 
   useEffect(() => {
     if (canvasRef.current) {
@@ -50,7 +51,18 @@ function useRayCaster({ width, height }, surfaces, color) {
 
       context.strokeStyle = color;
       context.fillStyle = color;
-      setLightVolumes(rayCasterEngine.draw(context));
+
+      if (boundaries) {
+        boundaries.forEach(boundary => boundary.draw(context));
+        light.draw(context);
+
+        interactions.forEach(({ a, b }) => {
+          context.beginPath();
+          context.moveTo(...a);
+          context.lineTo(...b);
+          context.stroke();
+        });
+      }
     }
 
     return () => {
@@ -58,5 +70,5 @@ function useRayCaster({ width, height }, surfaces, color) {
     };
   });
 
-  return [canvasRef, lightVolumes];
+  return canvasRef;
 }
