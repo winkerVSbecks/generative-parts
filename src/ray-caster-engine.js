@@ -159,7 +159,7 @@ export function useRayCasterEngine(
 
   useEffect(() => {
     const light = createLight(x, y, Math.max(width, height));
-    const p = 4; // padding
+    const p = 0; //4; // padding
 
     const surfaces = Object.keys(surfaceDims).map(name => ({
       name,
@@ -199,7 +199,7 @@ export function useRayCasterEngine(
     context.fillStyle = color;
 
     if (boundaries) {
-      boundaries.forEach(boundary => boundary.draw(context));
+      // boundaries.forEach(boundary => boundary.draw(context));
       light.draw(context);
 
       interactions.forEach(({ a, b }) => {

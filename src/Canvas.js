@@ -118,17 +118,18 @@ export default withTheme(Canvas);
 function lightToColor(lightVolume, colors) {
   return !lightVolume
     ? {
-        '--material-white': 'rgba(255, 255, 255, 1)',
+        '--material-white': chroma
+          .mix('white', colors.tertiary, 0.2, 'hsl')
+          .css(),
       }
     : {
         '--material-white': chroma
           .mix(
-            colors.tertiary,
             'white',
-            mapRange(lightVolume, 0, 1, 0.5, 1),
+            colors.tertiary,
+            mapRange(lightVolume, 0, 1, 0.2, 1),
             'hsl',
           )
-          // .blend(colors.primary, 'multiply')
           .css(),
       };
   // : {
