@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import Vector, { createVector, toRadians } from './vector';
 import { useWindowMousePosition } from './useMousePosition';
@@ -12,15 +12,8 @@ export const RayCasterDebug = styled.canvas`
   width: 100%;
   height: 100%;
   z-index: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: transparent;
 `;
-
-// export const RayCaster = withTheme(
-//   ({ windowDims, theme, boundaries, light, interactions }) => {
-
-//     return ;
-//   },
-// );
 
 /**
  * Boundary
@@ -181,33 +174,36 @@ export function useRayCasterEngine(
     setLightVolumes(
       interactions.reduce((acc, ray) => {
         if (!acc[ray.type]) acc[ray.type] = 0;
-        acc[ray.type] += 1 / 360;
+        acc[ray.type] += 1 / 10; // 1 / 360;
+        acc[ray.type] = Math.min(acc[ray.type], 1);
         return acc;
       }, {}),
     );
 
-    canvasRef.current.width = width * 2;
-    canvasRef.current.height = height * 2;
-    canvasRef.current.style.width = `${width}px`;
-    canvasRef.current.style.height = `${height}px`;
+    if (canvasRef.current) {
+      canvasRef.current.width = width * 2;
+      canvasRef.current.height = height * 2;
+      canvasRef.current.style.width = `${width}px`;
+      canvasRef.current.style.height = `${height}px`;
 
-    const context = canvasRef.current.getContext('2d');
-    context.scale(2, 2);
-    context.clearRect(0, 0, width, height);
+      const context = canvasRef.current.getContext('2d');
+      context.scale(2, 2);
+      context.clearRect(0, 0, width, height);
 
-    context.strokeStyle = color;
-    context.fillStyle = color;
+      context.strokeStyle = color;
+      context.fillStyle = color;
 
-    if (boundaries) {
-      // boundaries.forEach(boundary => boundary.draw(context));
-      light.draw(context);
+      if (boundaries) {
+        // boundaries.forEach(boundary => boundary.draw(context));
+        light.draw(context);
 
-      interactions.forEach(({ a, b }) => {
-        context.beginPath();
-        context.moveTo(...a);
-        context.lineTo(...b);
-        context.stroke();
-      });
+        interactions.forEach(({ a, b }) => {
+          context.beginPath();
+          context.moveTo(...a);
+          context.lineTo(...b);
+          context.stroke();
+        });
+      }
     }
   }, [width, height, surfaceDims, x, y, canvasRef, color]);
 

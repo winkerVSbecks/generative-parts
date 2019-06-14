@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { withTheme } from 'emotion-theming';
 import chroma from 'chroma-js';
 import {
@@ -12,8 +12,9 @@ import {
 import { ComponentGrid } from './ComponentGrid';
 import { Pager } from './Pager';
 import { InfoButton } from './Info';
+import { Toggle } from './Toggle';
 import { useDimensions } from './useDimensions';
-import { useRayCasterEngine, RayCasterDebug } from './ray-caster-engine';
+import { useRayCasterEngine, RayCasterDebug } from './useRayCasterEngine';
 
 function Canvas({ profile, media, activeIndex, selectTheme, theme }) {
   const typeSwRef = useRef(null);
@@ -44,9 +45,12 @@ function Canvas({ profile, media, activeIndex, selectTheme, theme }) {
     theme.colors.primary,
   );
 
+  const [debug, setDebug] = useState(false);
+
   return (
     <ComponentGrid mx={[0, 0, 0, 3]}>
-      <RayCasterDebug ref={canvasRef} />
+      {debug && <RayCasterDebug ref={canvasRef} />}
+      <Toggle enabled={debug} onClick={() => setDebug(!debug)} />
       <InfoButton />
 
       <ComponentGrid.One>
@@ -115,34 +119,30 @@ function Canvas({ profile, media, activeIndex, selectTheme, theme }) {
 
 export default withTheme(Canvas);
 
-function lightToColor(lightVolume, colors) {
-  return !lightVolume
-    ? {
-        '--material-white': chroma
-          .mix('white', colors.tertiary, 0.2, 'hsl')
-          .css(),
-      }
-    : {
-        '--material-white': chroma
-          .mix(
-            'white',
-            colors.tertiary,
-            mapRange(lightVolume, 0, 1, 0.2, 1),
-            'hsl',
-          )
-          .css(),
-      };
-  // : {
-  //     '--material-white': `rgba(255, 255, 255, ${mapRange(
-  //       lightVolume,
-  //       0,
-  //       1,
-  //       0.75,
-  //       1,
-  //     )})`,
-  //   };
+function lightToColor(lightVolume = 0, colors) {
+  return {
+    // '--material-white': chroma
+    //   .mix('white', colors.tertiary, mapRange(lightVolume, 0, 1, 0.2, 1), 'hsl')
+    //   .css(),
+    // '--material-white': chroma(colors.tertiary)
+    //   .luminance(mapRange(lightVolume, 0, 1, 0.5, 1))
+    //   .css(),
+    transition: 'all 0.1s ease-in-out',
+    '--material-white': chroma
+      .scale([colors.tertiary, colors.materialWhite])
+      .domain([0, 0.25, 1])(mapRange(lightVolume, 0, 1, 0, 1))
+      .css(),
+    '--material-gray': chroma(colors.materialGray)
+      .darken(mapRange(lightVolume, 0, 1, 2, 0))
+      .css(),
+    // opacity: mapRange(lightVolume, 0, 1, 0.5, 1),
+    // opacity: mapRange(lightVolume, 0, 1, 0.0625 * 2, 1),
+  };
 }
 
 function mapRange(n, start1, stop1, start2, stop2) {
-  return ((n - start1) / (stop1 - start1)) * (stop2 - start2) + start2;
+  let v = ((n - start1) / (stop1 - start1)) * (stop2 - start2) + start2;
+  // v = Math.min(v, stop2);
+  // v = Math.max(v, start2);
+  return v;
 }

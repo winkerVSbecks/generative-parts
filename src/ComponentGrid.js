@@ -8,6 +8,9 @@ export const ComponentGrid = styled(Card)(grid, {
 
 ComponentGrid.defaultProps = {
   backgroundColor: 'tertiary',
+  // borderWidth: 4,
+  // borderStyle: 'solid',
+  // borderColor: 'tertiary',
   alignContent: ['flex-end', 'center'],
   justifyItems: 'center',
   justifyContent: 'center',
