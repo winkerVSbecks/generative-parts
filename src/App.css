@@ -2,6 +2,7 @@
 
 body {
   background-color: black;
+  cursor: move;
 }
 
 [data-reach-dialog-overlay] {

@@ -147,15 +147,19 @@ export function useRayCasterEngine(
   canvasRef,
   color = 'white',
 ) {
-  const [lightVolumes, setLightVolumes] = useState({});
+  const [lights, setLights] = useState({});
   let { x, y } = useWindowMousePosition();
 
   useEffect(() => {
     const light = createLight(x, y, Math.max(width, height));
-    const p = 0; //4; // padding
+    const p = 0; // padding
 
     const surfaces = Object.keys(surfaceDims).map(name => ({
       name,
+      position: createVector(
+        surfaceDims[name].left + surfaceDims[name].width / 2,
+        surfaceDims[name].top + surfaceDims[name].height / 2,
+      ),
       dims: surfaceDims[name],
     }));
 
@@ -171,11 +175,26 @@ export function useRayCasterEngine(
 
     const interactions = look(light, boundaries);
 
-    setLightVolumes(
-      interactions.reduce((acc, ray) => {
-        if (!acc[ray.type]) acc[ray.type] = 0;
-        acc[ray.type] += 1 / 10; // 1 / 360;
-        acc[ray.type] = Math.min(acc[ray.type], 1);
+    const lightVolumes = interactions.reduce((acc, ray) => {
+      if (!acc[ray.type]) acc[ray.type] = 0;
+      acc[ray.type] = acc[ray.type] < 1 ? acc[ray.type] + 0.1 : acc[ray.type];
+      return acc;
+    }, {});
+
+    setLights(
+      surfaces.reduce((acc, surface) => {
+        const distance = light.position.dist(surface.position);
+
+        acc[surface.name] = {
+          direction: light.position
+            .copy()
+            .sub(surface.position)
+            .normalize()
+            .array(),
+          distance,
+          volume: lightVolumes[surface.name],
+        };
+
         return acc;
       }, {}),
     );
@@ -190,12 +209,12 @@ export function useRayCasterEngine(
       context.scale(2, 2);
       context.clearRect(0, 0, width, height);
 
-      context.strokeStyle = color;
-      context.fillStyle = color;
+      context.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+      // context.fillStyle = color;
 
       if (boundaries) {
         // boundaries.forEach(boundary => boundary.draw(context));
-        light.draw(context);
+        // light.draw(context);
 
         interactions.forEach(({ a, b }) => {
           context.beginPath();
@@ -207,5 +226,5 @@ export function useRayCasterEngine(
     }
   }, [width, height, surfaceDims, x, y, canvasRef, color]);
 
-  return lightVolumes;
+  return lights;
 }
