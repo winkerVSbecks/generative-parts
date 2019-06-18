@@ -7,16 +7,16 @@ import {
   MediaCard,
   SearchBar,
   ProfileCard,
-} from './components';
-import { ComponentGrid } from './ComponentGrid';
-import { Pager } from './Pager';
-import { InfoButton } from './Info';
-import { Toggle } from './Toggle';
+} from '../components';
+import { ComponentGrid } from '../ComponentGrid';
+import { Pager } from '../Pager';
+import { InfoButton } from '../Info';
+import { Toggle } from '../Toggle';
 import { useDimensions } from './useDimensions';
 import { useRayCasterEngine, RayCasterDebug } from './useRayCasterEngine';
 import { lightToStyles } from './lightToStyles';
 
-function Canvas({ profile, media, activeIndex, selectTheme, theme }) {
+function LightCanvas({ profile, media, activeIndex, selectTheme, theme }) {
   const typeSwRef = useRef(null);
   const profileRef = useRef(null);
   const navRef = useRef(null);
@@ -117,4 +117,4 @@ function Canvas({ profile, media, activeIndex, selectTheme, theme }) {
   );
 }
 
-export default withTheme(Canvas);
+export default withTheme(LightCanvas);

@@ -7,10 +7,12 @@ export default {
     tertiary: '#e5a8ff',
     white: '#ffffff',
     gray: '#898ba3',
+    white: 'var(--material-white)',
+    gray: 'var(--material-gray)',
   },
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   sizes: [16, 32, 64, 80, 128, 192, 256, 288, 384, 512, 768, 1024, 1536],
-  radii: [0, 2, 4, 6, 8, 16, 9999, '100%'],
+  radii: [0, 8, 16, 9999, '100%'],
   fontSizes: [12, 14, 16, 20, 24, 36, 48, 80, 96],
   fontWeights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
   fonts: {

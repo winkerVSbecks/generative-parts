@@ -1,26 +1,14 @@
 import React from 'react';
-import { ThemeProvider } from 'emotion-theming';
+import { Router, Link } from '@reach/router';
+import { DynamicLighting } from './DynamicLighting/DynamicLighting';
+import { ControlPanel } from './ControlPanel/ControlPanel';
 import './App.css';
-import theme from './theme';
-import { Container } from './primitives';
-import { useThemes } from './useThemes';
-import Canvas from './Canvas';
 
-function App() {
-  const [data, activeIndex, selectTheme] = useThemes();
-
+export default function App() {
   return (
-    <ThemeProvider theme={{ ...theme, ...data.theme }}>
-      <Container>
-        <Canvas
-          activeIndex={activeIndex}
-          selectTheme={selectTheme}
-          profile={data.profile}
-          media={data.media}
-        />
-      </Container>
-    </ThemeProvider>
+    <Router>
+      <DynamicLighting default path="/light" />
+      <ControlPanel path="/control-panel" />
+    </Router>
   );
 }
-
-export default App;
