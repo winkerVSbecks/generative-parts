@@ -7,8 +7,6 @@ export default {
     tertiary: '#e5a8ff',
     white: '#ffffff',
     gray: '#898ba3',
-    white: 'var(--material-white)',
-    gray: 'var(--material-gray)',
   },
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   sizes: [16, 32, 64, 80, 128, 192, 256, 288, 384, 512, 768, 1024, 1536],

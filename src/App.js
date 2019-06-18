@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Link } from '@reach/router';
+import { Router } from '@reach/router';
 import { DynamicLighting } from './DynamicLighting/DynamicLighting';
 import { ControlPanel } from './ControlPanel/ControlPanel';
 import './App.css';
