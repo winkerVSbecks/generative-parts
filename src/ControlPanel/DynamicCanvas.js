@@ -13,13 +13,21 @@ import { Pager } from '../Pager';
 import { InfoButton } from '../Info';
 import { Toggle } from '../Toggle';
 
-function DynamicCanvas({ profile, media, activeIndex, selectTheme, theme }) {
+function DynamicCanvas({
+  profile,
+  media,
+  activeIndex,
+  selectTheme,
+  children,
+  theme,
+}) {
   const [debug, setDebug] = useState(false);
 
   return (
     <ComponentGrid mx={[0, 0, 0, 3]}>
-      <Toggle enabled={debug} onClick={() => setDebug(!debug)} />
+      {/* <Toggle enabled={debug} onClick={() => setDebug(!debug)} /> */}
       <InfoButton />
+      {children}
 
       <ComponentGrid.One>
         <TypographySwatch mb={3} />

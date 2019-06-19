@@ -11,11 +11,42 @@ import {
   background,
   buttonStyle,
   grid,
+  fontSize,
 } from 'styled-system';
+import { withTheme } from 'emotion-theming';
+import 'rc-slider/assets/index.css';
+import Slider from 'rc-slider';
 import { ReactComponent as MenuIcon } from './menu.svg';
 import { ReactComponent as SearchIcon } from './search.svg';
 import { ReactComponent as InfoIcon } from './info.svg';
 import { ReactComponent as CloseIcon } from './x-circle.svg';
+
+const StyledSlider = styled(Slider)`
+  max-width: 200px;
+  .rc-slider-handle:active {
+    border: 0;
+    box-shadow: none;
+  }
+
+  .rc-slider-handle:focus {
+    border: 0;
+    box-shadow: none;
+  }
+`;
+
+export const InputRange = withTheme(({ theme, ...props }) => (
+  <StyledSlider
+    trackStyle={{ backgroundColor: theme.colors.white }}
+    handleStyle={{
+      borderColor: theme.colors.white,
+      backgroundColor: theme.colors.white,
+    }}
+    railStyle={{
+      backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    }}
+    {...props}
+  />
+));
 
 export const Box = styled.div(
   {
@@ -54,6 +85,19 @@ Heading.defaultProps = {
   fontFamily: 'inter',
   lineHeight: 'title',
   color: 'black',
+};
+
+export const Label = styled(Text)();
+
+Label.defaultProps = {
+  as: 'label',
+  mb: 0,
+  mt: 0,
+  mr: 2,
+  lineHeight: 'solid',
+  color: 'white',
+  fontWeight: 5,
+  fontSize: 1,
 };
 
 export const Image = styled(Box)(
