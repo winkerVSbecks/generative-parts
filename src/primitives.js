@@ -93,7 +93,7 @@ Label.defaultProps = {
   as: 'label',
   mb: 0,
   mt: 0,
-  mr: 2,
+  mr: 3,
   lineHeight: 'solid',
   color: 'white',
   fontWeight: 5,

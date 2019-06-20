@@ -25,8 +25,6 @@ function DynamicCanvas({
 
   return (
     <ComponentGrid mx={[0, 0, 0, 3]}>
-      {/* <Toggle enabled={debug} onClick={() => setDebug(!debug)} /> */}
-      <InfoButton />
       {children}
 
       <ComponentGrid.One>
