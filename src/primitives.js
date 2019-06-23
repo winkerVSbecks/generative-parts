@@ -11,7 +11,6 @@ import {
   background,
   buttonStyle,
   grid,
-  fontSize,
 } from 'styled-system';
 import { withTheme } from 'emotion-theming';
 import 'rc-slider/assets/index.css';
@@ -22,7 +21,7 @@ import { ReactComponent as InfoIcon } from './info.svg';
 import { ReactComponent as CloseIcon } from './x-circle.svg';
 
 const StyledSlider = styled(Slider)`
-  max-width: 200px;
+  max-width: 150px;
   .rc-slider-handle:active {
     border: 0;
     box-shadow: none;
@@ -36,13 +35,13 @@ const StyledSlider = styled(Slider)`
 
 export const InputRange = withTheme(({ theme, ...props }) => (
   <StyledSlider
-    trackStyle={{ backgroundColor: theme.colors.white }}
+    trackStyle={{ backgroundColor: 'currentColor' }}
     handleStyle={{
-      borderColor: theme.colors.white,
-      backgroundColor: theme.colors.white,
+      borderColor: 'currentColor',
+      backgroundColor: 'currentColor',
     }}
     railStyle={{
-      backgroundColor: 'rgba(255, 255, 255, 0.5)',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
     }}
     {...props}
   />
@@ -87,15 +86,16 @@ Heading.defaultProps = {
   color: 'black',
 };
 
-export const Label = styled(Text)();
+export const Label = styled(Text)({
+  display: 'block',
+});
 
 Label.defaultProps = {
   as: 'label',
-  mb: 0,
+  mb: 2,
   mt: 0,
-  mr: 3,
   lineHeight: 'solid',
-  color: 'white',
+  color: 'currentColor',
   fontWeight: 5,
   fontSize: 1,
 };

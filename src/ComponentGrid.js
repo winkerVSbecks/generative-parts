@@ -8,14 +8,11 @@ export const ComponentGrid = styled(Card)(grid, {
 
 ComponentGrid.defaultProps = {
   backgroundColor: 'tertiary',
-  // borderWidth: 4,
-  // borderStyle: 'solid',
-  // borderColor: 'tertiary',
   alignContent: ['flex-end', 'center'],
   justifyItems: 'center',
   justifyContent: 'center',
   borderRadius: [0, 0, 0, 2],
-  flexWrap: 'wrap', //['wrap', 'wrap', 'no-wrap', 'no-wrap'],
+  flexWrap: 'wrap',
   height: ['100%', '100%', '100%', 720],
   width: ['100%', '100%', '100%', 1184],
 };

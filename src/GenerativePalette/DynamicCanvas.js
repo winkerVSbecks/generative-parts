@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { withTheme } from 'emotion-theming';
 import {
   TypographySwatch,
@@ -10,8 +10,6 @@ import {
 } from '../components';
 import { ComponentGrid } from '../ComponentGrid';
 import { Pager } from '../Pager';
-import { InfoButton } from '../Info';
-import { Toggle } from '../Toggle';
 
 function DynamicCanvas({
   profile,
@@ -20,11 +18,12 @@ function DynamicCanvas({
   selectTheme,
   children,
   theme,
+  ...props
 }) {
-  const [debug, setDebug] = useState(false);
+  console.log(props);
 
   return (
-    <ComponentGrid mx={[0, 0, 0, 3]}>
+    <ComponentGrid mx={[0, 0, 0, 3]} {...props}>
       {children}
 
       <ComponentGrid.One>
