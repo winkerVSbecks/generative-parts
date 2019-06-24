@@ -16,12 +16,12 @@ export const Sliders = ({
     borderRadius={2}
     color="black"
     bg="white"
-    py={4}
-    px={3}
+    py={5}
+    px={4}
     flexDirection="column"
     {...props}
   >
-    <Box mb={4}>
+    <Box mb={5}>
       <Label htmlFor="hue">Hue</Label>
       <InputRange
         id="hue"
@@ -34,7 +34,7 @@ export const Sliders = ({
       />
     </Box>
 
-    <Box mb={4}>
+    <Box mb={5}>
       <Label htmlFor="saturation">Saturation</Label>
       <InputRange
         id="saturation"
@@ -47,7 +47,7 @@ export const Sliders = ({
       />
     </Box>
 
-    <Box mb={4}>
+    <Box mb={5}>
       <Label htmlFor="roundness">Roundness</Label>
       <InputRange
         id="roundness"
@@ -60,7 +60,7 @@ export const Sliders = ({
       />
     </Box>
 
-    <Box mb={4}>
+    <Box mb={5}>
       <Label htmlFor="spaciousness">Spaciousness</Label>
       <InputRange
         id="spaciousness"

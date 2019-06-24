@@ -21,7 +21,6 @@ import { ReactComponent as InfoIcon } from './info.svg';
 import { ReactComponent as CloseIcon } from './x-circle.svg';
 
 const StyledSlider = styled(Slider)`
-  max-width: 150px;
   .rc-slider-handle:active {
     border: 0;
     box-shadow: none;
