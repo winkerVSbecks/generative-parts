@@ -1,5 +1,7 @@
 import React from 'react';
 import { withTheme } from 'emotion-theming';
+import styled from '@emotion/styled';
+
 import {
   TypographySwatch,
   ColorSwatch,
@@ -8,8 +10,22 @@ import {
   SearchBar,
   ProfileCard,
 } from '../components';
-import { ComponentGrid } from '../ComponentGrid';
 import { Pager } from '../Pager';
+import { Card, Flex } from '../primitives';
+
+export const ComponentGrid = styled(Card)({
+  display: 'block',
+});
+
+ComponentGrid.defaultProps = {
+  py: 3,
+  px: 4,
+  borderRadius: 2,
+  maxWidth: 10,
+  my: 3,
+  ml: [3, 3, 'auto'],
+  mr: [3, 3, 'auto'],
+};
 
 function DynamicCanvas({
   profile,
@@ -20,40 +36,29 @@ function DynamicCanvas({
   theme,
   ...props
 }) {
-  console.log(props);
-
   return (
-    <ComponentGrid mx={[0, 0, 0, 3]} {...props}>
+    <ComponentGrid {...props}>
       {children}
+      <Pager
+        active={activeIndex}
+        onUpdate={selectTheme}
+        position="relative"
+        bottom={0}
+        mb={4}
+      />
 
-      <ComponentGrid.One>
-        <TypographySwatch mb={3} />
-        <ProfileCard {...profile} height={[144, 280, 280]} />
-      </ComponentGrid.One>
+      <TypographySwatch mb={4} />
+      <ProfileCard {...profile} height={[144, 280, 280]} mb={4} />
 
-      <ComponentGrid.Two>
-        <NavBar mb={3} />
-        <MediaCard {...media} height={[144, 328, 328]} mb={3} />
-        <SearchBar height={48} />
-      </ComponentGrid.Two>
+      <NavBar mb={4} />
+      <MediaCard {...media} height={[144, 328, 328]} mb={4} />
+      <SearchBar height={48} mb={4} />
 
-      <ComponentGrid.Three>
-        <ColorSwatch
-          name="black"
-          flex="1 1 146.67px"
-          mb={[0, 0, 3]}
-          mr={[3, 3, 0]}
-        />
-        <ColorSwatch
-          name="primary"
-          flex="1 1 146.67px"
-          mb={[0, 0, 3]}
-          mr={[3, 3, 0]}
-        />
+      <Flex height={6} mb={4}>
+        <ColorSwatch name="black" flex="1 1 146.67px" mr={3} />
+        <ColorSwatch name="primary" flex="1 1 146.67px" mr={3} />
         <ColorSwatch name="secondary" flex="1 1 146.67px" />
-      </ComponentGrid.Three>
-
-      <Pager active={activeIndex} onUpdate={selectTheme} />
+      </Flex>
     </ComponentGrid>
   );
 }

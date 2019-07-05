@@ -29,11 +29,12 @@ const PagerNav = styled(Box)({}, position);
 PagerNav.defaultProps = {
   position: ['relative', 'absolute'],
   bottom: [0, '24px', '32px'],
-  my: [3, 0],
+  mt: [3, 0],
+  mb: [3, 0],
 };
 
-export const Pager = ({ active, onUpdate }) => (
-  <PagerNav as="nav" aria-label="Theme Navigation" width="100%">
+export const Pager = ({ active, onUpdate, ...props }) => (
+  <PagerNav as="nav" aria-label="Theme Navigation" width="100%" {...props}>
     <Flex as="ul" alignItems="center" justifyContent="center" m={0} p={0}>
       <PagerItem>
         <IconButton
