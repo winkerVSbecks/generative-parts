@@ -10,7 +10,8 @@ const Circle = ({ isActive, ...props }) => (
     width={isActive ? '14px' : '10px'}
     height={isActive ? '14px' : '10px'}
     viewBox="0 0 24 24"
-    fill={isActive ? '#fff' : 'rgba(255, 255, 255, 0.5)'}
+    fill="currentColor"
+    opacity={isActive ? 1 : 0.5}
     m={1}
     {...props}
   >
@@ -33,14 +34,14 @@ PagerNav.defaultProps = {
   mb: [3, 0],
 };
 
-export const Pager = ({ active, onUpdate, ...props }) => (
+export const Pager = ({ active, onUpdate, color = '#fff', ...props }) => (
   <PagerNav as="nav" aria-label="Theme Navigation" width="100%" {...props}>
     <Flex as="ul" alignItems="center" justifyContent="center" m={0} p={0}>
       <PagerItem>
         <IconButton
           px={0}
           name="one"
-          icon={<Circle isActive={active === 0} />}
+          icon={<Circle color={color} isActive={active === 0} />}
           onClick={() => onUpdate(0)}
         />
       </PagerItem>
@@ -48,7 +49,7 @@ export const Pager = ({ active, onUpdate, ...props }) => (
         <IconButton
           px={0}
           name="two"
-          icon={<Circle isActive={active === 1} />}
+          icon={<Circle color={color} isActive={active === 1} />}
           onClick={() => onUpdate(1)}
         />
       </PagerItem>
@@ -56,7 +57,7 @@ export const Pager = ({ active, onUpdate, ...props }) => (
         <IconButton
           px={0}
           name="three"
-          icon={<Circle isActive={active === 2} />}
+          icon={<Circle color={color} isActive={active === 2} />}
           onClick={() => onUpdate(2)}
         />
       </PagerItem>

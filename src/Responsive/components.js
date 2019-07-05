@@ -10,9 +10,9 @@ import {
   Input,
   Image,
   PrimaryButton,
-} from './primitives';
-import { ReactComponent as Menu } from './menu.svg';
-import { ReactComponent as Search } from './search.svg';
+} from '../primitives';
+import { ReactComponent as Menu } from '../menu.svg';
+import { ReactComponent as Search } from '../search.svg';
 
 export const TypographySwatch = React.forwardRef((props, ref) => (
   <Card
