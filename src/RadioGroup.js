@@ -50,25 +50,20 @@ RadioGroupLabel.defaultProps = {
   fontSize: 2,
 };
 
-export const VerticalThemeSwitcher = ({
-  active,
-  onUpdate,
-  color = '#fff',
-  ...props
-}) => (
+export const RadioGroup = ({ onChange, selected, title, items, ...props }) => (
   <RadioGroupContainer as="fieldset" {...props}>
-    <RadioGroupTitle>Select a Theme</RadioGroupTitle>
+    <RadioGroupTitle>{title}</RadioGroupTitle>
     <Box width={size} alignItems="center" justifyContent="center">
-      {[0, 1, 2].map(theme => (
-        <Box key={`theme-${theme}`}>
+      {items.map(item => (
+        <Box key={`item-${item}`}>
           <RadioInput
             type="radio"
-            id={`theme-${theme}`}
+            id={`item-${item}`}
             name="radios"
-            onChange={() => onUpdate(theme)}
-            checked={active === theme}
+            onChange={() => onChange(item)}
+            checked={selected === item}
           />
-          <RadioGroupLabel htmlFor={`theme-${theme}`}>{theme}</RadioGroupLabel>
+          <RadioGroupLabel htmlFor={`item-${item}`}>{item}</RadioGroupLabel>
         </Box>
       ))}
     </Box>

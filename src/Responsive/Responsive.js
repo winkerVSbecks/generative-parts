@@ -5,7 +5,7 @@ import theme from '../theme';
 import { useThemes } from '../useThemes';
 import { Artboard } from './Artboard';
 import { Flex } from '../primitives';
-import { VerticalThemeSwitcher } from '../VerticalThemeSwitcher';
+import { RadioGroup } from '../RadioGroup';
 
 export function Responsive() {
   const [data, activeIndex, selectTheme] = useThemes();
@@ -21,10 +21,12 @@ export function Responsive() {
         }}
       />
       <Flex justifyContent="center" m={[3, 4]}>
-        <VerticalThemeSwitcher
+        <RadioGroup
           mr={4}
-          active={activeIndex}
-          onUpdate={selectTheme}
+          title="Select a Theme"
+          items={[0, 1, 2]}
+          selected={activeIndex}
+          onChange={selectTheme}
         />
         <Artboard
           activeIndex={activeIndex}
