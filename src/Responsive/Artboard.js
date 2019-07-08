@@ -31,20 +31,20 @@ export function Artboard({
             <ProfileCard {...profile} height={[144, 280, 280]} />
             <Spacing>32</Spacing>
 
-            <NavBar />
-            <Spacing>32</Spacing>
+            {/* <NavBar />
+            <Spacing>32</Spacing> */}
 
-            <MediaCard {...media} height={[144, 328, 328]} />
-            <Spacing>32</Spacing>
+            <MediaCard {...media} />
+            {/* <Spacing>32</Spacing> */}
 
-            <SearchBar height={48} />
-            <Spacing>32</Spacing>
+            {/* <SearchBar height={48} />
+            <Spacing>32</Spacing> */}
 
-            <Flex height={[4, 5]}>
+            {/* <Flex height={[4, 5]}>
               <ColorSwatch name="black" flex="1 1 146.67px" mr={3} />
               <ColorSwatch name="primary" flex="1 1 146.67px" mr={3} />
               <ColorSwatch name="secondary" flex="1 1 146.67px" />
-            </Flex>
+            </Flex> */}
           </div>
         )}
       />

@@ -15,26 +15,15 @@ import {
 import { ReactComponent as Menu } from '../menu.svg';
 import { ReactComponent as Search } from '../search.svg';
 
-function useResponsiveSystem() {
+function useResponsiveSystem(bps = [640, 832, 1024]) {
   const ref = useRef(null);
   const { width } = useComponentSize(ref);
-  const bps = [640, 832, 1024];
-  let mq = -1;
 
-  if (width < 640) {
-    mq = 0;
-  }
-  if (width >= 640 && width < 832) {
-    mq = 1;
-  }
-  if (width >= 832 && width < 1024) {
-    mq = 2;
-  }
-  if (width >= 1024) {
-    mq = 3;
-  }
+  bps.push(width);
+  bps.sort((a, b) => a - b);
+  const cq = bps.indexOf(width);
 
-  const rsx = styles => (styles[mq] ? styles[mq] : styles[styles.length - 1]);
+  const rsx = styles => (styles[cq] ? styles[cq] : styles[styles.length - 1]);
 
   return [ref, rsx];
 }
@@ -89,19 +78,35 @@ export const NavBar = ({ name, ...props }) => (
   </Card>
 );
 
-export const MediaCard = ({ image, title, body, ...props }) => (
-  <Card bg="white" flexDirection={['row', 'column']} {...props}>
-    <BackgroundImage image={image} minWidth={4} flex="1 1 auto" />
-    <Flex justifyContent="center" flexDirection="column" py={[3, 4]} px={3}>
-      <Heading fontSize={2} color="black" mb={2}>
-        {title}
-      </Heading>
-      <Text fontSize={1} color="gray">
-        {body}
-      </Text>
-    </Flex>
-  </Card>
-);
+export const MediaCard = ({ image, title, body, ...props }) => {
+  const [ref, rsx] = useResponsiveSystem([480, 640, 1024]);
+
+  return (
+    <Card
+      bg="white"
+      flexDirection={rsx(['row', 'column', 'row', 'row'])}
+      height={rsx([144, 328, 236, 236])}
+      ref={ref}
+      {...props}
+    >
+      <BackgroundImage image={image} minWidth={4} flex="1 1 auto" />
+      <Flex
+        flex={rsx(['1 1 auto', 'none', '1 1 auto', '1 1 auto'])}
+        justifyContent="center"
+        flexDirection="column"
+        py={rsx([0, 4, 0])}
+        px={rsx([3, 3, 4])}
+      >
+        <Heading fontSize={rsx([2, 3, 4])} color="black" mb={2}>
+          {title}
+        </Heading>
+        <Text fontSize={rsx([1, 2, 3])} color="gray">
+          {body}
+        </Text>
+      </Flex>
+    </Card>
+  );
+};
 
 export const SearchBar = ({ name, ...props }) => (
   <Card
