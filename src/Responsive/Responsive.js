@@ -33,6 +33,7 @@ export function Responsive() {
           selectTheme={selectTheme}
           profile={data.profile}
           media={data.media}
+          maxWidth={11}
           flex="1 1 auto"
           mx={0}
         />

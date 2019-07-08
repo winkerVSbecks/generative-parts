@@ -21,7 +21,7 @@ export function Artboard({
   ...props
 }) {
   return (
-    <Box maxWidth={10} {...props}>
+    <Box {...props}>
       <Dimensions
         render={ref => (
           <div ref={ref}>
