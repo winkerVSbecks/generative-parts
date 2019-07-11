@@ -1,15 +1,8 @@
 import React from 'react';
-import {
-  TypographySwatch,
-  ColorSwatch,
-  NavBar,
-  MediaCard,
-  SearchBar,
-  ProfileCard,
-} from './components';
+import { TypographySwatch, MediaCard, ProfileCard } from './components';
 
-import { Box, Flex } from '../primitives';
-import { Spacing, Dimensions } from './RedLines';
+import { Box } from '../primitives';
+import { SpacingY, Dimensions } from './RedLines';
 
 export function Artboard({
   profile,
@@ -26,25 +19,12 @@ export function Artboard({
         render={ref => (
           <div ref={ref}>
             <TypographySwatch />
-            <Spacing>32</Spacing>
-
-            <ProfileCard {...profile} height={[144, 280, 280]} />
-            <Spacing>32</Spacing>
-
-            {/* <NavBar />
-            <Spacing>32</Spacing> */}
+            <SpacingY type="margin">32</SpacingY>
 
             <MediaCard {...media} />
-            {/* <Spacing>32</Spacing> */}
+            <SpacingY type="margin">32</SpacingY>
 
-            {/* <SearchBar height={48} />
-            <Spacing>32</Spacing> */}
-
-            {/* <Flex height={[4, 5]}>
-              <ColorSwatch name="black" flex="1 1 146.67px" mr={3} />
-              <ColorSwatch name="primary" flex="1 1 146.67px" mr={3} />
-              <ColorSwatch name="secondary" flex="1 1 146.67px" />
-            </Flex> */}
+            <ProfileCard {...profile} height={[144, 280, 280]} />
           </div>
         )}
       />

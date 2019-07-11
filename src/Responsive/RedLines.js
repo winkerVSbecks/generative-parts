@@ -15,22 +15,54 @@ const spacer = system({
   },
 });
 
-export const Spacing = styled(Flex)(
-  {
-    backgroundColor: 'rgba(245, 88, 88, .16)',
-    color: '#B80000',
+export const SpacingY = styled(Flex)(
+  props => ({
+    flex: 'none',
+    backgroundColor:
+      props.type === 'margin'
+        ? 'rgba(245, 88, 88, .16)'
+        : 'rgba(0, 235, 172, .24)',
+    color: props.type === 'margin' ? '#B80000' : '#008F5F',
     textAlign: 'center',
-  },
+    opacity: props.vertical === 0 ? 0 : 0.75,
+  }),
   spacer,
   typography,
 );
 
-Spacing.defaultProps = {
+SpacingY.defaultProps = {
+  type: 'margin',
   alignItems: 'center',
   justifyContent: 'center',
-  width: 4,
+  width: [3, 3, 4],
   vertical: 4,
   mx: 'auto',
+  fontSize: '0',
+  fontWeight: 4,
+};
+
+export const SpacingX = styled(Flex)(
+  props => ({
+    flex: 'none',
+    backgroundColor:
+      props.type === 'margin'
+        ? 'rgba(245, 88, 88, .16)'
+        : 'rgba(0, 235, 172, .24)',
+    color: props.type === 'margin' ? '#B80000' : '#008F5F',
+    textAlign: 'center',
+    opacity: props.horizontal === 0 ? 0 : 0.75,
+  }),
+  spacer,
+  typography,
+);
+
+SpacingX.defaultProps = {
+  type: 'margin',
+  alignItems: 'center',
+  justifyContent: 'center',
+  height: [3, 3, 4],
+  horizontal: 4,
+  my: 'auto',
   fontSize: '0',
   fontWeight: 4,
 };

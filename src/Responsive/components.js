@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import useComponentSize from '@rehooks/component-size';
+import theme from '../theme';
 import {
   Card,
   Text,
@@ -14,6 +15,7 @@ import {
 } from '../primitives';
 import { ReactComponent as Menu } from '../menu.svg';
 import { ReactComponent as Search } from '../search.svg';
+import { SpacingY, SpacingX } from './RedLines';
 
 function useResponsiveSystem(bps = [640, 832, 1024]) {
   const ref = useRef(null);
@@ -47,37 +49,6 @@ export const TypographySwatch = props => {
   );
 };
 
-export const ColorSwatch = ({ name, ...props }) => (
-  <Card bg="white" flexDirection="column" {...props}>
-    <Box bg={name} flex="1 1 auto" />
-    <Text
-      style={{ textTransform: 'capitalize' }}
-      fontWeight={500}
-      fontSize={['0', 1, 1]}
-      m={0}
-      lineHeight="solid"
-      p={3}
-    >
-      {name}
-    </Text>
-  </Card>
-);
-
-export const NavBar = ({ name, ...props }) => (
-  <Card as="nav" bg="white" height={64} alignItems="center" px={3} {...props}>
-    <IconButton color="gray" name="Menu" icon={<Menu />} />
-    <Heading
-      fontSize={[3, 4]}
-      lineHeight="solid"
-      flex="1 1 0"
-      textAlign="center"
-    >
-      Details
-    </Heading>
-    <IconButton color="gray" name="Search" icon={<Search />} />
-  </Card>
-);
-
 export const MediaCard = ({ image, title, body, ...props }) => {
   const [ref, rsx] = useResponsiveSystem([480, 640, 1024]);
 
@@ -92,36 +63,38 @@ export const MediaCard = ({ image, title, body, ...props }) => {
       <BackgroundImage image={image} minWidth={4} flex="1 1 auto" />
       <Flex
         flex={rsx(['1 1 auto', 'none', '1 1 auto', '1 1 auto'])}
-        justifyContent="center"
-        flexDirection="column"
-        py={rsx([0, 4, 0])}
-        px={rsx([3, 3, 4])}
+        alignItems="center"
       >
-        <Heading fontSize={rsx([2, 3, 4])} color="black" mb={2}>
-          {title}
-        </Heading>
-        <Text fontSize={rsx([1, 2, 3])} color="gray">
-          {body}
-        </Text>
+        <SpacingX type="padding" horizontal={rsx([3, 3, 4])}>
+          {theme.space[rsx([3, 3, 4])]}
+        </SpacingX>
+        <Flex
+          flex="1"
+          justifyContent="center"
+          flexDirection="column"
+          py={0}
+          px={0}
+        >
+          <SpacingY type="padding" vertical={rsx([0, 4, 0])}>
+            {theme.space[rsx([0, 4, 0])]}
+          </SpacingY>
+          <Heading fontSize={rsx([2, 3, 4])} color="black" mb={2}>
+            {title}
+          </Heading>
+          <Text fontSize={rsx([1, 2, 3])} color="gray">
+            {body}
+          </Text>
+          <SpacingY type="padding" vertical={rsx([0, 4, 0])}>
+            {theme.space[rsx([0, 4, 0])]}
+          </SpacingY>
+        </Flex>
+        <SpacingX type="padding" horizontal={rsx([3, 3, 4])}>
+          {theme.space[rsx([3, 3, 4])]}
+        </SpacingX>
       </Flex>
     </Card>
   );
 };
-
-export const SearchBar = ({ name, ...props }) => (
-  <Card
-    as="section"
-    role="search"
-    bg="white"
-    height={64}
-    alignItems="center"
-    px={3}
-    {...props}
-  >
-    <Search color="gray" aria-hidden="true" />
-    <Input type="search" aria-label="search" ml={3} />
-  </Card>
-);
 
 export const ProfileCard = ({ avatar, name, title, ...props }) => (
   <Card
@@ -167,5 +140,51 @@ export const ProfileCard = ({ avatar, name, title, ...props }) => (
         Follow
       </PrimaryButton>
     </Box>
+  </Card>
+);
+
+export const ColorSwatch = ({ name, ...props }) => (
+  <Card bg="white" flexDirection="column" {...props}>
+    <Box bg={name} flex="1 1 auto" />
+    <Text
+      style={{ textTransform: 'capitalize' }}
+      fontWeight={500}
+      fontSize={['0', 1, 1]}
+      m={0}
+      lineHeight="solid"
+      p={3}
+    >
+      {name}
+    </Text>
+  </Card>
+);
+
+export const NavBar = ({ name, ...props }) => (
+  <Card as="nav" bg="white" height={64} alignItems="center" px={3} {...props}>
+    <IconButton color="gray" name="Menu" icon={<Menu />} />
+    <Heading
+      fontSize={[3, 4]}
+      lineHeight="solid"
+      flex="1 1 0"
+      textAlign="center"
+    >
+      Details
+    </Heading>
+    <IconButton color="gray" name="Search" icon={<Search />} />
+  </Card>
+);
+
+export const SearchBar = ({ name, ...props }) => (
+  <Card
+    as="section"
+    role="search"
+    bg="white"
+    height={64}
+    alignItems="center"
+    px={3}
+    {...props}
+  >
+    <Search color="gray" aria-hidden="true" />
+    <Input type="search" aria-label="search" ml={3} />
   </Card>
 );
