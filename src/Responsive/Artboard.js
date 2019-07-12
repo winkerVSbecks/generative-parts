@@ -19,6 +19,15 @@ export function Artboard({
         mb={4}
         render={ref => (
           <div ref={ref}>
+            <ProfileCard {...profile} />
+          </div>
+        )}
+      />
+
+      <Dimensions
+        mb={4}
+        render={ref => (
+          <div ref={ref}>
             <TypographySwatch />
           </div>
         )}
@@ -29,15 +38,6 @@ export function Artboard({
         render={ref => (
           <div ref={ref}>
             <MediaCard {...media} />
-          </div>
-        )}
-      />
-
-      <Dimensions
-        mb={4}
-        render={ref => (
-          <div ref={ref}>
-            <ProfileCard {...profile} height={[144, 280, 280]} />
           </div>
         )}
       />

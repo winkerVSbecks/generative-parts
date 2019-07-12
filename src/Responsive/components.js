@@ -25,7 +25,8 @@ function useResponsiveSystem(bps = [640, 832, 1024]) {
   bps.sort((a, b) => a - b);
   const cq = bps.indexOf(width);
 
-  const rsx = styles => (styles[cq] ? styles[cq] : styles[styles.length - 1]);
+  const rsx = styles =>
+    styles[cq] !== undefined ? styles[cq] : styles[styles.length - 1];
 
   return [ref, rsx];
 }
@@ -78,9 +79,12 @@ export const MediaCard = ({ image, title, body, ...props }) => {
           <SpacingY type="padding" vertical={rsx([0, 4, 0])}>
             {theme.space[rsx([0, 4, 0])]}
           </SpacingY>
-          <Heading fontSize={rsx([2, 3, 4])} color="black" mb={2}>
+          <Heading fontSize={rsx([2, 3, 4])} color="black" mb={0}>
             {title}
           </Heading>
+          <SpacingY type="margin" vertical={2} ml={0}>
+            {theme.space[2]}
+          </SpacingY>
           <Text fontSize={rsx([1, 2, 3])} color="gray">
             {body}
           </Text>
@@ -96,52 +100,68 @@ export const MediaCard = ({ image, title, body, ...props }) => {
   );
 };
 
-export const ProfileCard = ({ avatar, name, title, ...props }) => (
-  <Card
-    bg="white"
-    flexDirection={['row', 'column']}
-    alignItems="center"
-    justifyContent={['flex-start', 'center']}
-    pr={4}
-    pl={[0, 4]}
-    {...props}
-  >
-    <Image
-      src={avatar}
-      flex="none"
-      width={['auto', 3]}
-      height={['100%', 3]}
-      borderRadius={[0, '100%']}
-    />
-    <Box
-      width={['auto', '100%']}
-      mt={[0, 3]}
-      ml={[4, 0]}
-      justifyContent={['flex-end', 'center']}
-      flexDirection="column"
+export const ProfileCard = ({ avatar, name, title, ...props }) => {
+  const [ref, rsx] = useResponsiveSystem([480, 640, 1024]);
+
+  return (
+    <Card
+      ref={ref}
+      bg="white"
+      flexDirection={rsx(['column', 'row'])}
+      alignItems="center"
+      justifyContent={rsx(['center', 'flex-start'])}
+      height={rsx([280, 144, 212])}
+      {...props}
     >
-      <Heading
-        fontSize={[3, 2]}
-        color="black"
-        textAlign={['left', 'center']}
-        mb={[1, 2]}
+      <Image
+        src={avatar}
+        flex="none"
+        width={rsx([3, 'auto'])}
+        height={rsx([3, '100%'])}
+        borderRadius={rsx(['100%', 0])}
+      />
+      <SpacingX type="margin" horizontal={rsx([0, 4])}>
+        {theme.space[rsx([0, 4])]}
+      </SpacingX>
+      <SpacingY type="margin" vertical={rsx([3, 0])}>
+        {theme.space[rsx([3, 0])]}
+      </SpacingY>
+      <Box
+        width={rsx(['100%', 'auto'])}
+        justifyContent={rsx(['center', 'flex-end'])}
+        flexDirection="column"
       >
-        {name}
-      </Heading>
-      <Text
-        fontSize={2}
-        color="gray"
-        textAlign={['left', 'center']}
-        mb={[3, 4]}
-      >
-        {title}
-      </Text>
-      <PrimaryButton px={3} py={[2, 3]} width={[4, '100%']} mx="auto">
-        Follow
-      </PrimaryButton>
-    </Box>
-  </Card>
-);
+        <Heading
+          fontSize={rsx([2, 3, 4])}
+          color="black"
+          textAlign={rsx(['center', 'left'])}
+          mb={0}
+        >
+          {name}
+        </Heading>
+        <SpacingY type="margin" vertical={rsx([1, 2])} ml={rsx(['auto', 0])}>
+          {theme.space[rsx([1, 2])]}
+        </SpacingY>
+        <Text
+          fontSize={rsx([2, 2, 3])}
+          color="gray"
+          textAlign={rsx(['center', 'left'])}
+          mb={rsx([4, 3])}
+        >
+          {title}
+        </Text>
+        <PrimaryButton
+          px={3}
+          py={rsx([3, 2, 3])}
+          width={rsx(['100%', 4, 5])}
+          mx="auto"
+        >
+          Follow
+        </PrimaryButton>
+      </Box>
+    </Card>
+  );
+};
 
 export const ColorSwatch = ({ name, ...props }) => (
   <Card bg="white" flexDirection="column" {...props}>
