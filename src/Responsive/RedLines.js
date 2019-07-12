@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import useComponentSize from '@rehooks/component-size';
 import styled from '@emotion/styled';
 import { system, border, typography } from 'styled-system';
+import { Resizable } from 're-resizable';
 import { Box, Text, Flex } from '../primitives';
 
 const spacer = system({
@@ -70,35 +71,57 @@ SpacingX.defaultProps = {
 const DimensionContainer = styled(Flex)(border);
 const DimensionValue = styled(Text)(border);
 
-export const Dimensions = ({ render }) => {
+export const Dimensions = ({ render, ...props }) => {
   const ref = useRef(null);
   const size = useComponentSize(ref);
 
   return (
-    <React.Fragment>
-      <DimensionContainer
-        alignItems="center"
-        borderLeft="2px solid #F55858"
-        borderRight="2px solid #F55858"
-        py={1}
-        mb={2}
+    <Box {...props}>
+      <Resizable
+        style={{
+          border: 'solid 1px rgba(0, 0, 0, 0.2)',
+          backgroundColor: '#efefef',
+          cursor: 'col-resize',
+          padding: '1rem',
+        }}
+        enable={{
+          top: false,
+          right: true,
+          bottom: false,
+          left: false,
+          topRight: false,
+          bottomRight: false,
+          bottomLeft: false,
+          topLeft: false,
+        }}
+        defaultSize={{
+          width: '100%',
+        }}
       >
-        <Box backgroundColor="#F55858" height="2px" flex="1" />
-        <DimensionValue
-          backgroundColor="#F55858"
-          color="#fff"
-          width={3}
+        <DimensionContainer
+          alignItems="center"
+          borderLeft="2px solid #F55858"
+          borderRight="2px solid #F55858"
           py={1}
-          textAlign="center"
-          borderRadius="3px"
-          fontSize={1}
-          fontWeight={4}
+          mb={2}
         >
-          {size.width}
-        </DimensionValue>
-        <Box backgroundColor="#F55858" height="2px" flex="1" />
-      </DimensionContainer>
-      {render(ref)}
-    </React.Fragment>
+          <Box backgroundColor="#F55858" height="2px" flex="1" />
+          <DimensionValue
+            backgroundColor="#F55858"
+            color="#fff"
+            width={3}
+            py={1}
+            textAlign="center"
+            borderRadius="3px"
+            fontSize={1}
+            fontWeight={4}
+          >
+            {size.width}
+          </DimensionValue>
+          <Box backgroundColor="#F55858" height="2px" flex="1" />
+        </DimensionContainer>
+        {render(ref)}
+      </Resizable>
+    </Box>
   );
 };

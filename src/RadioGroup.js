@@ -5,9 +5,15 @@ import { Box, Text } from './primitives';
 const size = 2;
 
 const RadioGroupContainer = styled(Box)({
-  border: 0,
+  borderWidth: 2,
+  borderStyle: 'solid',
+  borderColor: 'white',
+  borderRadius: 3,
   padding: 0,
   marginLeft: 0,
+  ':hover, :focus-within': {
+    borderColor: '#e5e5e5',
+  },
 });
 RadioGroupContainer.defaultProps = {
   as: 'fieldset',
@@ -25,11 +31,11 @@ const RadioInput = styled.input`
   position: absolute;
 
   &:focus + label {
-    outline: thick double ${props => props.theme.colors.gray};
+    border-radius: 0;
   }
 
   &:checked + label {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: #e5e5e5;
   }
 `;
 
@@ -37,11 +43,12 @@ const RadioGroupLabel = styled(Text)({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  borderRadius: 3,
 });
 
 RadioGroupLabel.defaultProps = {
   as: 'label',
-  backgroundColor: 'rgba(0, 0, 0, 0.1)',
+  backgroundColor: '#fff',
   lineHeight: 'solid',
   width: size,
   height: size,

@@ -15,12 +15,12 @@ export function Responsive() {
       <Global
         styles={{
           body: {
-            backgroundColor: '#efefef',
-            cursor: 'col-resize',
+            backgroundColor: '#fff',
+            cursor: 'auto',
           },
         }}
       />
-      <Flex justifyContent="center" m={[3, 4]}>
+      <Flex alignItems="flex-start" justifyContent="center" m={[3, 4]}>
         <RadioGroup
           mr={4}
           title="Select a Theme"

@@ -2,7 +2,7 @@ import React from 'react';
 import { TypographySwatch, MediaCard, ProfileCard } from './components';
 
 import { Box } from '../primitives';
-import { SpacingY, Dimensions } from './RedLines';
+import { Dimensions } from './RedLines';
 
 export function Artboard({
   profile,
@@ -16,14 +16,27 @@ export function Artboard({
   return (
     <Box {...props}>
       <Dimensions
+        mb={4}
         render={ref => (
           <div ref={ref}>
             <TypographySwatch />
-            <SpacingY type="margin">32</SpacingY>
+          </div>
+        )}
+      />
 
+      <Dimensions
+        mb={4}
+        render={ref => (
+          <div ref={ref}>
             <MediaCard {...media} />
-            <SpacingY type="margin">32</SpacingY>
+          </div>
+        )}
+      />
 
+      <Dimensions
+        mb={4}
+        render={ref => (
+          <div ref={ref}>
             <ProfileCard {...profile} height={[144, 280, 280]} />
           </div>
         )}

@@ -13,6 +13,7 @@
     "emotion-theming": "^10.0.10",
     "hsluv": "0.0.3",
     "rc-slider": "^8.6.13",
+    "re-resizable": "^5.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-pose": "^4.0.8",
