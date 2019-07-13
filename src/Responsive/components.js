@@ -50,7 +50,7 @@ export const TypographySwatch = props => {
   );
 };
 
-export const MediaCard = ({ image, title, body, ...props }) => {
+export const MediaCard = ({ image, title, body, debug, ...props }) => {
   const [ref, rsx] = useResponsiveSystem([480, 640, 1024]);
 
   return (
@@ -66,7 +66,7 @@ export const MediaCard = ({ image, title, body, ...props }) => {
         flex={rsx(['1 1 auto', 'none', '1 1 auto', '1 1 auto'])}
         alignItems="center"
       >
-        <SpacingX type="padding" horizontal={rsx([3, 3, 4])}>
+        <SpacingX visible={debug} type="padding" horizontal={rsx([3, 3, 4])}>
           {theme.space[rsx([3, 3, 4])]}
         </SpacingX>
         <Flex
@@ -76,23 +76,23 @@ export const MediaCard = ({ image, title, body, ...props }) => {
           py={0}
           px={0}
         >
-          <SpacingY type="padding" vertical={rsx([0, 4, 0])}>
+          <SpacingY visible={debug} type="padding" vertical={rsx([0, 4, 0])}>
             {theme.space[rsx([0, 4, 0])]}
           </SpacingY>
           <Heading fontSize={rsx([2, 3, 4])} color="black" mb={0}>
             {title}
           </Heading>
-          <SpacingY type="margin" vertical={2} ml={0}>
+          <SpacingY visible={debug} type="margin" vertical={2} ml={0}>
             {theme.space[2]}
           </SpacingY>
           <Text fontSize={rsx([1, 2, 3])} color="gray">
             {body}
           </Text>
-          <SpacingY type="padding" vertical={rsx([0, 4, 0])}>
+          <SpacingY visible={debug} type="padding" vertical={rsx([0, 4, 0])}>
             {theme.space[rsx([0, 4, 0])]}
           </SpacingY>
         </Flex>
-        <SpacingX type="padding" horizontal={rsx([3, 3, 4])}>
+        <SpacingX visible={debug} type="padding" horizontal={rsx([3, 3, 4])}>
           {theme.space[rsx([3, 3, 4])]}
         </SpacingX>
       </Flex>
@@ -100,7 +100,7 @@ export const MediaCard = ({ image, title, body, ...props }) => {
   );
 };
 
-export const ProfileCard = ({ avatar, name, title, ...props }) => {
+export const ProfileCard = ({ avatar, name, title, debug, ...props }) => {
   const [ref, rsx] = useResponsiveSystem([480, 640, 1024]);
 
   return (
@@ -120,45 +120,66 @@ export const ProfileCard = ({ avatar, name, title, ...props }) => {
         height={rsx([3, '100%'])}
         borderRadius={rsx(['100%', 0])}
       />
-      <SpacingX type="margin" horizontal={rsx([0, 4])}>
+      <SpacingX visible={debug} type="margin" horizontal={rsx([0, 4])}>
         {theme.space[rsx([0, 4])]}
       </SpacingX>
-      <SpacingY type="margin" vertical={rsx([3, 0])}>
+      <SpacingY visible={debug} type="margin" vertical={rsx([3, 0])}>
         {theme.space[rsx([3, 0])]}
       </SpacingY>
-      <Box
-        width={rsx(['100%', 'auto'])}
-        justifyContent={rsx(['center', 'flex-end'])}
-        flexDirection="column"
-      >
-        <Heading
-          fontSize={rsx([2, 3, 4])}
-          color="black"
-          textAlign={rsx(['center', 'left'])}
-          mb={0}
+      <Flex alignItems="center" width={rsx(['100%', 'auto'])}>
+        <SpacingX visible={debug} type="padding" horizontal={rsx([3, 0])}>
+          {theme.space[rsx([3, 0])]}
+        </SpacingX>
+        <Box
+          flex="1"
+          justifyContent={rsx(['center', 'flex-end'])}
+          flexDirection="column"
         >
-          {name}
-        </Heading>
-        <SpacingY type="margin" vertical={rsx([1, 2])} ml={rsx(['auto', 0])}>
-          {theme.space[rsx([1, 2])]}
-        </SpacingY>
-        <Text
-          fontSize={rsx([2, 2, 3])}
-          color="gray"
-          textAlign={rsx(['center', 'left'])}
-          mb={rsx([4, 3])}
-        >
-          {title}
-        </Text>
-        <PrimaryButton
-          px={3}
-          py={rsx([3, 2, 3])}
-          width={rsx(['100%', 4, 5])}
-          mx="auto"
-        >
-          Follow
-        </PrimaryButton>
-      </Box>
+          <Heading
+            fontSize={rsx([2, 3, 4])}
+            color="black"
+            textAlign={rsx(['center', 'left'])}
+            mb={0}
+          >
+            {name}
+          </Heading>
+          <SpacingY
+            visible={debug}
+            type="margin"
+            vertical={rsx([1, 2])}
+            ml={rsx(['auto', 0])}
+          >
+            {theme.space[rsx([1, 2])]}
+          </SpacingY>
+          <Text
+            fontSize={rsx([2, 2, 3])}
+            color="gray"
+            textAlign={rsx(['center', 'left'])}
+            mb={0}
+          >
+            {title}
+          </Text>
+          <SpacingY
+            visible={debug}
+            type="margin"
+            vertical={rsx([4, 3])}
+            ml={rsx(['auto', 0])}
+          >
+            {theme.space[rsx([4, 3])]}
+          </SpacingY>
+          <PrimaryButton
+            px={3}
+            py={rsx([3, 2, 3])}
+            width={rsx(['100%', 4, 5])}
+            mx="auto"
+          >
+            Follow
+          </PrimaryButton>
+        </Box>
+        <SpacingX visible={debug} type="padding" horizontal={rsx([3, 0])}>
+          {theme.space[rsx([3, 0])]}
+        </SpacingX>
+      </Flex>
     </Card>
   );
 };

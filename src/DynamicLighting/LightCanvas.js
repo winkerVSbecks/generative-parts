@@ -50,7 +50,15 @@ function LightCanvas({ profile, media, activeIndex, selectTheme, theme }) {
   return (
     <ComponentGrid mx={[0, 0, 0, 3]}>
       {debug && <RayCasterDebug ref={canvasRef} />}
-      <Toggle enabled={debug} onClick={() => setDebug(!debug)} />
+      <Toggle
+        style={{
+          position: 'absolute',
+          left: 0,
+          top: 0,
+        }}
+        enabled={debug}
+        onClick={() => setDebug(!debug)}
+      />
       <InfoButton />
 
       <ComponentGrid.One>

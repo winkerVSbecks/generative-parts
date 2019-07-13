@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { color } from 'styled-system';
 import posed from 'react-pose';
 
 const ToggleIndicator = posed.circle({
@@ -12,14 +13,15 @@ const ToggleIndicator = posed.circle({
 });
 
 const ToggleButton = styled.svg`
-  position: absolute;
-  left: 0;
-  top: 0;
   padding: ${props => props.theme.space[3]}px;
-  color: ${props => props.theme.colors.white};
+  ${color}
 `;
 
-export const Toggle = ({ enabled, onClick }) => (
+ToggleButton.defaultProps = {
+  color: 'white',
+};
+
+export const Toggle = ({ enabled, onClick, ...props }) => (
   <ToggleButton
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -39,6 +41,7 @@ export const Toggle = ({ enabled, onClick }) => (
     role="button"
     tabIndex="0"
     aria-pressed={enabled}
+    {...props}
   >
     <rect aria-hidden="true" x="1" y="5" width="22" height="14" rx="7" ry="7" />
     <ToggleIndicator

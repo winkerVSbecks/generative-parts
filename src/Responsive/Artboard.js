@@ -11,6 +11,7 @@ export function Artboard({
   selectTheme,
   children,
   theme,
+  debug,
   ...props
 }) {
   return (
@@ -19,7 +20,16 @@ export function Artboard({
         mb={4}
         render={ref => (
           <div ref={ref}>
-            <ProfileCard {...profile} />
+            <MediaCard debug={debug} {...media} />
+          </div>
+        )}
+      />
+
+      <Dimensions
+        mb={4}
+        render={ref => (
+          <div ref={ref}>
+            <ProfileCard debug={debug} {...profile} />
           </div>
         )}
       />
@@ -29,15 +39,6 @@ export function Artboard({
         render={ref => (
           <div ref={ref}>
             <TypographySwatch />
-          </div>
-        )}
-      />
-
-      <Dimensions
-        mb={4}
-        render={ref => (
-          <div ref={ref}>
-            <MediaCard {...media} />
           </div>
         )}
       />
