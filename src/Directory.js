@@ -16,7 +16,7 @@ const ExperimentLink = styled(Link, { shouldForwardProp })(
   props => ({
     ':hover, :focus': {
       backgroundColor: props.theme.colors.primary,
-      color: props.theme.colors.white,
+      color: props.theme.colors.black,
     },
   }),
   border,

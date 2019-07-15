@@ -1,10 +1,8 @@
 export default {
   breakpoints: ['40em', '52em', '64em', '72em'],
   colors: {
-    black: '#2d2733',
-    primary: '#d675ff',
-    secondary: '#f9e9fe',
-    tertiary: '#e5a8ff',
+    black: '#020502',
+    primary: '#78f0a6',
     white: '#ffffff',
     gray: '#898ba3',
   },
@@ -28,6 +26,3 @@ export default {
     mega: '0.25em',
   },
 };
-
-// background-color: #78f0a6;
-// color: #020502;
