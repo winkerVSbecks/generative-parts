@@ -3,15 +3,19 @@ import { Router } from '@reach/router';
 import { DynamicLighting } from './DynamicLighting/DynamicLighting';
 import { GenerativePalette } from './GenerativePalette/GenerativePalette';
 import { Responsive } from './Responsive/Responsive';
+import { Directory } from './Directory';
+import { GenerativeLayout } from './GenerativeLayout';
 import './App.css';
 
 export default function App() {
   return (
     <Router>
-      <DynamicLighting default path="/light" />
+      <DynamicLighting path="/light" />
       <GenerativePalette path="/generative" />
       <GenerativePalette path="/recipe" />
       <Responsive path="/responsive" />
+      <GenerativeLayout path="/layout" />
+      <Directory default />
     </Router>
   );
 }

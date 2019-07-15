@@ -15,10 +15,10 @@ import {
 import { withTheme } from 'emotion-theming';
 import 'rc-slider/assets/index.css';
 import Slider from 'rc-slider';
-import { ReactComponent as MenuIcon } from './menu.svg';
-import { ReactComponent as SearchIcon } from './search.svg';
-import { ReactComponent as InfoIcon } from './info.svg';
-import { ReactComponent as CloseIcon } from './x-circle.svg';
+import { ReactComponent as MenuIcon } from './icons/menu.svg';
+import { ReactComponent as SearchIcon } from './icons/search.svg';
+import { ReactComponent as InfoIcon } from './icons/info.svg';
+import { ReactComponent as CloseIcon } from './icons/x-circle.svg';
 
 const StyledSlider = styled(Slider)`
   .rc-slider-handle:active {
@@ -180,15 +180,17 @@ PrimaryButton.defaultProps = {
   fontWeight: 6,
 };
 
-export const Link = styled(Box)(props => ({
-  ':hover': {
-    color: props.theme.colors.tertiary,
+export const Link = styled(Text)(props => ({
+  textDecoration: 'none',
+
+  ':hover, :focus': {
+    color: props.theme.colors.primary,
   },
 }));
 
 Link.defaultProps = {
   as: 'a',
-  color: 'primary',
+  color: 'white',
 };
 
 export const Container = styled(Flex)({ overflow: 'hidden' });
@@ -211,6 +213,8 @@ export const TransparentButton = styled(Button)`
   }
 `;
 
+export const Icon = styled.svg(space, color, layout, flexbox);
+Icon.defaultProps = { width: 1, height: 1 };
 export const Menu = styled(MenuIcon)({}, color, space);
 export const Search = styled(SearchIcon)({}, color, space);
 export const Info = styled(InfoIcon)({}, color, space);
