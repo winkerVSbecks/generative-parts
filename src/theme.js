@@ -28,3 +28,6 @@ export default {
     mega: '0.25em',
   },
 };
+
+// background-color: #78f0a6;
+// color: #020502;
