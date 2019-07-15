@@ -13,7 +13,7 @@ export function useDebugGrid(initialRowCount, initialColumnCount) {
     const width = gridEl.current.getBoundingClientRect().width;
     setRowCount(Math.floor(height / size));
     setColumnCount(Math.floor(width / size));
-  });
+  }, []);
 
   const itemCount = rowCount * columnCount;
 

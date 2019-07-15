@@ -2,7 +2,6 @@ import { useState } from 'react';
 import createContainer from 'constate';
 import { range, randomSize } from './utils';
 
-const getValue = e => cb => cb(e.target.value);
 const generateGridItems = count =>
   range(count).map(idx => ({
     key: idx,

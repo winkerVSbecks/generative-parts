@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ThemeProvider } from 'emotion-theming';
 import theme from '../theme';
-import { Container, Flex } from '../primitives';
+import { Container } from '../primitives';
 import { useThemes } from '../useThemes';
 import DynamicCanvas from './DynamicCanvas';
 import { Sliders } from './Sliders';

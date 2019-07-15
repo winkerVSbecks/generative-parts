@@ -3,6 +3,7 @@ import { ThemeProvider } from 'emotion-theming';
 import { Link as RouterLink } from '@reach/router';
 import styled from '@emotion/styled';
 import { border, shadow, background, grid } from 'styled-system';
+import shouldForwardProp from '@styled-system/should-forward-prop';
 import theme from './theme';
 import { Flex, Link, Heading, Box, Icon } from './primitives';
 import { ReactComponent as SunIcon } from './icons/sun.svg';
@@ -10,7 +11,7 @@ import { ReactComponent as SlidersIcon } from './icons/sliders.svg';
 import { ReactComponent as MaxIcon } from './icons/maximize-2.svg';
 import { ReactComponent as LayoutIcon } from './icons/layout.svg';
 
-const ExperimentLink = styled(Link)(
+const ExperimentLink = styled(Link, { shouldForwardProp })(
   { display: 'flex' },
   props => ({
     ':hover, :focus': {
@@ -24,8 +25,8 @@ const ExperimentLink = styled(Link)(
   grid,
 );
 ExperimentLink.defaultProps = {
-  width: 5,
-  height: 5,
+  width: [4, 5],
+  height: [4, 5],
   backgroundColor: 'white',
   borderRadius: '3px',
   alignItems: 'center',
