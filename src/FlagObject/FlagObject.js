@@ -3,7 +3,7 @@ import { ThemeProvider } from 'emotion-theming';
 import { Global } from '@emotion/core';
 import theme, { globalStyles } from './theme';
 import { Flex, Box, Image, Text, Icon, Link, Hidden } from '../primitives';
-import { Headline, StandFirst, Meta, MetaLink } from './components';
+import { Headline, StandFirst, Meta, MetaLink, Pillar } from './components';
 
 const story = {
   headline:
@@ -20,14 +20,13 @@ export function FlagObject() {
     <ThemeProvider theme={theme}>
       <Global styles={globalStyles} />
       <Flex alignItems="flex-start" justifyContent="center" m={[3, 4]}>
-        <Box backgroundColor="neutral.6">
+        <Box width={10} backgroundColor="neutral.6">
           <Box>
             <Headline>
-              <span class="fc-item__kicker">Football</span>
-              {story.headline}
+              <Pillar>Football</Pillar> {story.headline}
             </Headline>
             <Box>
-              <StandFirst>{story.standFirst}</StandFirst>
+              <StandFirst mb={2}>{story.standFirst}</StandFirst>
               <Flex justifyContent="space-between">
                 <Meta
                   as="time"

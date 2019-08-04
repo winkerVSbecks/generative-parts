@@ -6,10 +6,12 @@ export const Headline = styled(Heading)();
 
 Headline.defaultProps = {
   as: 'h2',
-  mb: 0,
+  mb: 3,
   mt: 0,
   fontFamily: 'serif',
+  fontWeight: 'bold',
   lineHeight: 'title',
+  fontSize: 4,
   color: 'neutral.0',
 };
 
@@ -22,6 +24,22 @@ StandFirst.defaultProps = {
   fontFamily: 'serif',
   lineHeight: 'copy',
   color: 'neutral.0',
+  fontSize: 1,
+};
+
+export const Pillar = styled(Heading)`
+  :after {
+    content: '/';
+    display: inline-block;
+    font-weight: bold;
+    margin-left: ${props => props.theme.space[1]}px;
+  }
+`;
+
+Pillar.defaultProps = {
+  as: 'span',
+  fontFamily: 'serif',
+  color: 'pillar.main',
 };
 
 export const Meta = styled.span(
