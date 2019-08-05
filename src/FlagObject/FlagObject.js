@@ -2,8 +2,17 @@ import React from 'react';
 import { ThemeProvider } from 'emotion-theming';
 import { Global } from '@emotion/core';
 import theme, { globalStyles } from './theme';
-import { Flex, Box, Image, Text, Icon, Link, Hidden } from '../primitives';
-import { Headline, StandFirst, Meta, MetaLink, Pillar } from './components';
+import { Flex, Box, Text, Icon, Link, Hidden } from '../primitives';
+import {
+  Card,
+  Headline,
+  StandFirst,
+  Meta,
+  MetaLink,
+  Pillar,
+  Media,
+  Blocky,
+} from './components';
 
 const story = {
   headline:
@@ -16,23 +25,31 @@ const story = {
 };
 
 export function FlagObject() {
+  const [contentHidden, setContentHidden] = React.useState(true);
+
   return (
     <ThemeProvider theme={theme}>
       <Global styles={globalStyles} />
       <Flex alignItems="flex-start" justifyContent="center" m={[3, 4]}>
-        <Box width={10} backgroundColor="neutral.6">
-          <Box>
+        <Card width={10} backgroundColor="neutral.6">
+          <Box mb={3} mt={1}>
             <Headline>
-              <Pillar>Football</Pillar> {story.headline}
+              <Pillar blocky={contentHidden}>Football</Pillar>{' '}
+              <Blocky color="neutral.0" blocky={contentHidden}>
+                {story.headline}
+              </Blocky>
             </Headline>
             <Box>
-              <StandFirst mb={2}>{story.standFirst}</StandFirst>
+              <StandFirst mb={2}>
+                <Blocky color="neutral.1" blocky={contentHidden}>
+                  {story.standFirst}
+                </Blocky>
+              </StandFirst>
               <Flex justifyContent="space-between">
                 <Meta
                   as="time"
                   datetime="2019-08-02T18:27:00+0000"
-                  data-timestamp="1564770420000"
-                  data-relativeformat="short"
+                  blocky={contentHidden}
                 >
                   <Icon
                     width="11px"
@@ -47,10 +64,10 @@ export function FlagObject() {
                   <Hidden>Published: </Hidden>2 Aug 2019
                 </Meta>
                 <MetaLink
-                  class="fc-trail__count fc-trail__count--commentcount"
                   href="https://www.theguardian.com/football/2019/aug/03/jadon-sancho-stars-as-dortmund-earn-supercup-win-over-bayern-munich#comments"
                   data-link-name="Comment count"
                   aria-label="32 comments"
+                  blocky={contentHidden}
                 >
                   <Icon
                     width="14px"
@@ -68,8 +85,8 @@ export function FlagObject() {
               </Flex>
             </Box>
           </Box>
-          <Image src={story.media} />
-        </Box>
+          <Media blocky={false} aspectRatio={4 / 3} image={story.media} />
+        </Card>
       </Flex>
     </ThemeProvider>
   );

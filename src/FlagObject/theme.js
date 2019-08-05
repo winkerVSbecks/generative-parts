@@ -11,14 +11,14 @@ export default {
       faded: '#f1f8fc',
     },
     neutral: [
-      '#121212', // brightness 7
-      '#333333', // brightness 20
-      '#767676', // brightness 46
-      '#999999', // brightness 60
-      '#dcdcdc', // brightness 86
-      '#ededed', // brightness 93
-      '#f6f6f6', // brightness 97
-      '#ffffff', // brightness 100
+      '#121212', // 0 brightness 7
+      '#333333', // 1 brightness 20
+      '#767676', // 2 brightness 46
+      '#999999', // 3 brightness 60
+      '#dcdcdc', // 4 brightness 86
+      '#ededed', // 5 brightness 93
+      '#f6f6f6', // 6 brightness 97
+      '#ffffff', // 7 brightness 100
     ],
     black: '#121212',
     primary: '#78f0a6',

@@ -117,10 +117,12 @@ export const BackgroundImage = styled.div(
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
+    height: 0,
   },
   props => ({
     backgroundColor: props.theme.colors.gray,
     backgroundImage: props.image ? `url(${props.image})` : null,
+    paddingBottom: `${(1 / props.aspectRatio) * 100}%`,
   }),
   layout,
   flexbox,
