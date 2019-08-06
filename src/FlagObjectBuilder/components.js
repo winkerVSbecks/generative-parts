@@ -4,7 +4,7 @@ import { themeGet } from '@styled-system/theme-get';
 import {
   Text,
   Heading,
-  BackgroundImage,
+  AspectRatioImage,
   Card as BaseCard,
 } from '../primitives';
 
@@ -96,7 +96,7 @@ MetaLink.defaultProps = {
   color: 'neutral.3',
 };
 
-export const Media = styled(BackgroundImage)`
+export const Media = styled(AspectRatioImage)`
   position: relative;
 
   :after {

@@ -118,6 +118,20 @@ export const BackgroundImage = styled.div(
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
+  },
+  props => ({
+    backgroundColor: props.theme.colors.gray,
+    backgroundImage: props.image ? `url(${props.image})` : null,
+  }),
+  layout,
+  flexbox,
+);
+
+export const AspectRatioImage = styled.div(
+  {
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
     height: 0,
   },
   props => ({
@@ -128,6 +142,9 @@ export const BackgroundImage = styled.div(
   layout,
   flexbox,
 );
+AspectRatioImage.defaultProps = {
+  aspectRatio: 1,
+};
 
 export const Card = styled(Box)(
   { display: 'flex', overflow: 'hidden' },

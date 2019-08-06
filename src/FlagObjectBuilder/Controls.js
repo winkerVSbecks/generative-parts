@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Label, Heading } from '../primitives';
+import { Box, Flex, Label, Heading, InputRange } from '../primitives';
 import { Toggle } from '../Toggle';
 import { RadioGroup } from '../RadioGroup';
 
@@ -17,28 +17,12 @@ const Togglable = ({ name, value, onChange }) => (
   </Flex>
 );
 
-export const Controls = ({
-  headline,
-  setHeadline,
-  pillar,
-  setPillar,
-  standFirst,
-  setStandFirst,
-  meta,
-  setMeta,
-  media,
-  setMedia,
-  contentHidden,
-  setContentHidden,
-  border,
-  setBorder,
-  ...props
-}) => {
+export const Controls = ({ toggles, alignment, sliders, ...props }) => {
   return (
     <Box p={3} {...props}>
       <Heading
         as="h2"
-        mt={5}
+        mt={4}
         mb={4}
         borderColor="neutral.4"
         borderStyle="solid"
@@ -48,34 +32,35 @@ export const Controls = ({
       >
         Controls
       </Heading>
-
-      <Togglable
-        name="Content Hidden"
-        value={contentHidden}
-        onChange={setContentHidden}
-      />
-      <Togglable name="Headline" value={headline} onChange={setHeadline} />
-      <Togglable name="Pillar" value={pillar} onChange={setPillar} />
-      <Togglable
-        name="Stand First"
-        value={standFirst}
-        onChange={setStandFirst}
-      />
-      <Togglable name="Meta" value={meta} onChange={setMeta} />
-      <Togglable name="Media" value={media} onChange={setMedia} />
-      <Togglable name="Border" value={border} onChange={setBorder} />
-
+      {toggles.map(toggle => (
+        <Togglable key={toggle.name} {...toggle} />
+      ))}
       <Heading as="h3" fontSize={2} mt={5} mb={3}>
         Alignment
       </Heading>
-      <Box>
+      {alignment.map(radioGrp => (
         <RadioGroup
-          title="Select a Theme"
-          items={['⬌', '⬍']}
-          selected={'⬍'}
-          onChange={() => {}}
+          key={radioGrp.title}
+          direction="row"
+          size={1}
+          mb={2}
+          items={[
+            { label: '⬌', value: 'row' },
+            { label: '⬍', value: 'column' },
+          ]}
+          {...radioGrp}
         />
-      </Box>
+      ))}
+      <Heading as="h3" fontSize={2} mt={5} mb={3}>
+        Size
+      </Heading>
+      {sliders.map(slider => (
+        <Box key={slider.name} maxWidth={6} mb={2}>
+          <Label htmlFor={slider.name}>{slider.name}</Label>
+          <InputRange id={slider.name} min={0} max={12} step={1} {...slider} />
+        </Box>
+      ))}
+      <Box />
     </Box>
   );
 };

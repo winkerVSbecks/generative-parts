@@ -29,9 +29,21 @@ export const FlagObject = ({
   media,
   contentHidden,
   border,
+  contentDir,
+  standfirstDir,
+  metaDir,
+  width,
+  height,
 }) => (
-  <Card width={10} backgroundColor="neutral.6" borderWidth={border ? 2 : 0}>
-    <Box p={1}>
+  <Card
+    flexDirection={contentDir}
+    width={width}
+    height={height > 9 ? 'auto' : height}
+    backgroundColor="neutral.6"
+    justifyContent="stretch"
+    borderWidth={border ? 2 : 0}
+  >
+    <Flex flexDirection="column" p={2} flex="1 1 34%">
       {headline && (
         <Headline mb={0}>
           {pillar && <Pillar blocky={contentHidden}>Football</Pillar>}{' '}
@@ -40,26 +52,48 @@ export const FlagObject = ({
           </Blocky>
         </Headline>
       )}
-      <Box>
+      <Flex mt={3} flexDirection={standfirstDir}>
         {standFirst && (
-          <StandFirst mt={3}>
+          <StandFirst flex="1" mr={standfirstDir === 'row' ? 3 : 0}>
             <Blocky color="neutral.1" blocky={contentHidden}>
               {story.standFirst}
             </Blocky>
           </StandFirst>
         )}
-        {meta && <MetaContent mt={2} contentHidden={contentHidden} />}
-      </Box>
-    </Box>
+        {meta && (
+          <MetaContent
+            flexDirection={metaDir}
+            mt={2}
+            contentHidden={contentHidden}
+          />
+        )}
+      </Flex>
+    </Flex>
     {media && (
-      <Media blocky={contentHidden} aspectRatio={5 / 3} image={story.media} />
+      <Media
+        flex="1 1 66%"
+        blocky={contentHidden}
+        aspectRatio={5 / 3}
+        image={story.media}
+      />
     )}
   </Card>
 );
 
-const MetaContent = ({ contentHidden, ...props }) => (
-  <Flex justifyContent="space-between" {...props}>
-    <Meta as="time" datetime="2019-08-02T18:27:00+0000" blocky={contentHidden}>
+const MetaContent = ({ contentHidden, flexDirection, ...props }) => (
+  <Flex
+    justifyContent="space-between"
+    flex="none"
+    flexDirection={flexDirection}
+    {...props}
+  >
+    <Meta
+      mr={flexDirection === 'row' ? 2 : 0}
+      mb={flexDirection === 'column' ? 2 : 0}
+      as="time"
+      datetime="2019-08-02T18:27:00+0000"
+      blocky={contentHidden}
+    >
       <Icon
         width="11px"
         height="11px"
