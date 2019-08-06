@@ -29,6 +29,8 @@ export const Controls = ({
   setMedia,
   contentHidden,
   setContentHidden,
+  border,
+  setBorder,
   ...props
 }) => {
   return (
@@ -59,6 +61,7 @@ export const Controls = ({
       />
       <Togglable name="Meta" value={meta} onChange={setMeta} />
       <Togglable name="Media" value={media} onChange={setMedia} />
+      <Togglable name="Border" value={border} onChange={setBorder} />
     </Box>
   );
 };

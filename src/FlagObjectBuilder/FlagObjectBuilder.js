@@ -7,28 +7,7 @@ import { FlagObject } from './FlagObject';
 import { Controls } from './Controls';
 
 export function FlagObjectBuilder() {
-  const [contentHidden, setContentHidden] = React.useState(true);
-  const [headline, setHeadline] = React.useState(true);
-  const [pillar, setPillar] = React.useState(true);
-  const [standFirst, setStandFirst] = React.useState(true);
-  const [meta, setMeta] = React.useState(true);
-  const [media, setMedia] = React.useState(true);
-  const [content, setContent] = React.useState(true);
-
-  const controls = {
-    headline,
-    setHeadline,
-    pillar,
-    setPillar,
-    standFirst,
-    setStandFirst,
-    meta,
-    setMeta,
-    media,
-    setMedia,
-    contentHidden,
-    setContentHidden,
-  };
+  const controls = useControls();
 
   return (
     <ThemeProvider theme={theme}>
@@ -47,4 +26,31 @@ export function FlagObjectBuilder() {
       </Flex>
     </ThemeProvider>
   );
+}
+
+function useControls() {
+  const [contentHidden, setContentHidden] = React.useState(true);
+  const [headline, setHeadline] = React.useState(true);
+  const [pillar, setPillar] = React.useState(true);
+  const [standFirst, setStandFirst] = React.useState(true);
+  const [meta, setMeta] = React.useState(true);
+  const [media, setMedia] = React.useState(true);
+  const [border, setBorder] = React.useState(true);
+
+  return {
+    headline,
+    setHeadline,
+    pillar,
+    setPillar,
+    standFirst,
+    setStandFirst,
+    meta,
+    setMeta,
+    media,
+    setMedia,
+    contentHidden,
+    setContentHidden,
+    border,
+    setBorder,
+  };
 }
