@@ -1,17 +1,9 @@
 import styled from '@emotion/styled';
-import {
-  space,
-  color,
-  layout,
-  flexbox,
-  typography,
-  flexDirection,
-} from 'styled-system';
+import { space, color, layout, flexbox, typography } from 'styled-system';
 import { themeGet } from '@styled-system/theme-get';
 import {
   Text,
   Heading,
-  Image,
   BackgroundImage,
   Card as BaseCard,
 } from '../primitives';
@@ -110,7 +102,7 @@ export const Media = styled(BackgroundImage)`
   :after {
     content: '';
     position: absolute;
-    background-color: ${props => props.theme.colors.neutral[3]};
+    background-color: ${props => props.theme.colors.neutral[4]};
     top: 0;
     right: 0;
     bottom: 0;

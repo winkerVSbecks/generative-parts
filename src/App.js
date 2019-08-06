@@ -5,7 +5,7 @@ import { GenerativePalette } from './GenerativePalette/GenerativePalette';
 import { Responsive } from './Responsive/Responsive';
 import { Directory } from './Directory';
 import { GenerativeLayout } from './GenerativeLayout';
-import { FlagObject } from './FlagObject/FlagObject';
+import { FlagObjectBuilder } from './FlagObjectBuilder/FlagObjectBuilder';
 import './App.css';
 
 export default function App() {
@@ -16,7 +16,7 @@ export default function App() {
       <GenerativePalette path="/recipe" />
       <Responsive path="/responsive" />
       <GenerativeLayout path="/layout" />
-      <FlagObject path="/flag" />
+      <FlagObjectBuilder path="/flag" />
       <Directory default />
     </Router>
   );

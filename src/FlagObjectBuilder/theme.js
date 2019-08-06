@@ -23,7 +23,6 @@ export default {
     black: '#121212',
     primary: '#78f0a6',
     white: '#ffffff',
-    color: '#999',
     gray: '#767676',
   },
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],

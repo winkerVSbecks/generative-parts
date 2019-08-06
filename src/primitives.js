@@ -55,6 +55,7 @@ export const Box = styled.div(
   color,
   layout,
   flexbox,
+  border,
 );
 
 export const Flex = styled(Box)({
