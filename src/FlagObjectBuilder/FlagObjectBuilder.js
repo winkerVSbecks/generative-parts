@@ -48,7 +48,7 @@ function useControls() {
   return {
     toggles: [
       {
-        name: 'Content Hidden',
+        name: 'Blocky Content',
         value: contentHidden,
         onChange: setContentHidden,
       },

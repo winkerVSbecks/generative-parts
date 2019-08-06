@@ -20,22 +20,30 @@ const Togglable = ({ name, value, onChange }) => (
 export const Controls = ({ toggles, alignment, sliders, ...props }) => {
   return (
     <Box p={3} {...props}>
-      <Heading
-        as="h2"
-        mt={4}
-        mb={4}
-        borderColor="neutral.4"
-        borderStyle="solid"
-        borderWidth={2}
-        borderX="none"
-        borderTop="none"
-      >
+      <Heading as="h2" mt={3} mb={3}>
         Controls
+      </Heading>
+      <Heading
+        as="h3"
+        fontSize={1}
+        mt={4}
+        mb={2}
+        color="neutral.2"
+        style={{ textTransform: 'uppercase', letterSpacing: '0.1em' }}
+      >
+        Visibility
       </Heading>
       {toggles.map(toggle => (
         <Togglable key={toggle.name} {...toggle} />
       ))}
-      <Heading as="h3" fontSize={2} mt={5} mb={3}>
+      <Heading
+        as="h3"
+        fontSize={1}
+        mt={4}
+        mb={2}
+        color="neutral.2"
+        style={{ textTransform: 'uppercase', letterSpacing: '0.1em' }}
+      >
         Alignment
       </Heading>
       {alignment.map(radioGrp => (
@@ -51,7 +59,14 @@ export const Controls = ({ toggles, alignment, sliders, ...props }) => {
           {...radioGrp}
         />
       ))}
-      <Heading as="h3" fontSize={2} mt={5} mb={3}>
+      <Heading
+        as="h3"
+        fontSize={1}
+        mt={4}
+        mb={3}
+        color="neutral.2"
+        style={{ textTransform: 'uppercase', letterSpacing: '0.1em' }}
+      >
         Size
       </Heading>
       {sliders.map(slider => (
