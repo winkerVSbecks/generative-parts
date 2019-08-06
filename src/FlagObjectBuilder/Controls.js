@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Flex, Label, Heading } from '../primitives';
 import { Toggle } from '../Toggle';
+import { RadioGroup } from '../RadioGroup';
 
 const Togglable = ({ name, value, onChange }) => (
   <Flex alignItems="center" mb={2}>
@@ -36,6 +37,7 @@ export const Controls = ({
   return (
     <Box p={3} {...props}>
       <Heading
+        as="h2"
         mt={5}
         mb={4}
         borderColor="neutral.4"
@@ -62,6 +64,18 @@ export const Controls = ({
       <Togglable name="Meta" value={meta} onChange={setMeta} />
       <Togglable name="Media" value={media} onChange={setMedia} />
       <Togglable name="Border" value={border} onChange={setBorder} />
+
+      <Heading as="h3" fontSize={2} mt={5} mb={3}>
+        Alignment
+      </Heading>
+      <Box>
+        <RadioGroup
+          title="Select a Theme"
+          items={['⬌', '⬍']}
+          selected={'⬍'}
+          onChange={() => {}}
+        />
+      </Box>
     </Box>
   );
 };

@@ -31,9 +31,9 @@ export const FlagObject = ({
   border,
 }) => (
   <Card width={10} backgroundColor="neutral.6" borderWidth={border ? 2 : 0}>
-    <Box mb={3}>
+    <Box p={1}>
       {headline && (
-        <Headline>
+        <Headline mb={0}>
           {pillar && <Pillar blocky={contentHidden}>Football</Pillar>}{' '}
           <Blocky color="neutral.0" blocky={contentHidden}>
             {story.headline}
@@ -42,13 +42,13 @@ export const FlagObject = ({
       )}
       <Box>
         {standFirst && (
-          <StandFirst mb={2}>
+          <StandFirst mt={3}>
             <Blocky color="neutral.1" blocky={contentHidden}>
               {story.standFirst}
             </Blocky>
           </StandFirst>
         )}
-        {meta && <MetaContent contentHidden={contentHidden} />}
+        {meta && <MetaContent mt={2} contentHidden={contentHidden} />}
       </Box>
     </Box>
     {media && (
