@@ -5,7 +5,7 @@ import { RadioGroup } from '../RadioGroup';
 
 const Togglable = ({ name, value, onChange }) => (
   <Flex alignItems="center" mb={2}>
-    <Label mb={0} mr={3} width={4}>
+    <Label mb={0} mr={3} width={5}>
       {name}
     </Label>
     <Toggle
@@ -17,10 +17,42 @@ const Togglable = ({ name, value, onChange }) => (
   </Flex>
 );
 
-export const Controls = ({ toggles, alignment, sliders, ...props }) => {
+const JustifyContent = ({ label, value, onChange }) => (
+  <Flex alignItems="center" mb={2}>
+    <Label
+      mb={0}
+      mr={3}
+      width={4}
+      htmlFor={`text-spacing-${label.replace(/\s/g, '-')}`}
+    >
+      {label}
+    </Label>
+    <select
+      id={`text-spacing-${label.replace(/\s/g, '-')}`}
+      value={value}
+      onChange={e => onChange(e.target.value)}
+    >
+      <option value="flex-start">start</option>
+      <option value="center">center</option>
+      <option value="space-between">space-between</option>
+      <option value="space-around">space-around</option>
+      <option value="flex-end">end</option>
+    </select>
+  </Flex>
+);
+
+export const Controls = ({
+  toggles,
+  alignment,
+  sliders,
+  contentAlignment,
+  contentOrder,
+  setContentOrder,
+  ...props
+}) => {
   return (
     <Box p={3} {...props}>
-      <Heading as="h2" mt={3} mb={3}>
+      <Heading as="h2" mt={0} mb={3}>
         Controls
       </Heading>
       <Heading
@@ -58,6 +90,9 @@ export const Controls = ({ toggles, alignment, sliders, ...props }) => {
           ]}
           {...radioGrp}
         />
+      ))}
+      {contentAlignment.map(section => (
+        <JustifyContent key={section.label} {...section} />
       ))}
       <Heading
         as="h3"

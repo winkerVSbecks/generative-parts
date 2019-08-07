@@ -14,6 +14,7 @@ export function FlagObjectBuilder() {
       <Global styles={globalStyles} />
       <Flex>
         <Flex
+          style={{ overflow: 'hidden' }}
           flex="1"
           height="100vh"
           alignItems="center"
@@ -23,7 +24,15 @@ export function FlagObjectBuilder() {
         >
           <FlagObject {...controls.flagObjectProps} />
         </Flex>
-        <Controls width={0.25} {...controls} />
+        <Controls
+          height="100vh"
+          style={{
+            overflow: 'scroll',
+            WebkitOverflowScrolling: 'touch',
+          }}
+          width={0.25}
+          {...controls}
+        />
       </Flex>
     </ThemeProvider>
   );
@@ -37,13 +46,17 @@ function useControls() {
   const [meta, setMeta] = React.useState(true);
   const [media, setMedia] = React.useState(true);
   const [border, setBorder] = React.useState(true);
+  const [reverseContentOrder, setReverseContentOrder] = React.useState(true);
 
   const [contentDir, setContentDir] = React.useState('column');
   const [standfirstDir, setStandfirstDir] = React.useState('column');
   const [metaDir, setMetaDir] = React.useState('row');
+  const [textAlignment, setTextAlignment] = React.useState('flex-start');
+  const [metaAlignment, setMetaAlignment] = React.useState('flex-start');
 
-  const [width, setWidth] = React.useState(11);
+  const [width, setWidth] = React.useState(10);
   const [height, setHeight] = React.useState(10);
+  const [mediaPadding, setMediaPadding] = React.useState(0);
 
   return {
     toggles: [
@@ -58,6 +71,11 @@ function useControls() {
       { name: 'Meta', value: meta, onChange: setMeta },
       { name: 'Media', value: media, onChange: setMedia },
       { name: 'Border', value: border, onChange: setBorder },
+      {
+        name: 'Reverse Content Order',
+        value: reverseContentOrder,
+        onChange: setReverseContentOrder,
+      },
     ],
     alignment: [
       { title: 'Content', selected: contentDir, onChange: setContentDir },
@@ -72,9 +90,28 @@ function useControls() {
         onChange: setMetaDir,
       },
     ],
+    contentAlignment: [
+      {
+        label: 'Text Content',
+        value: textAlignment,
+        onChange: setTextAlignment,
+      },
+      {
+        label: 'Meta Content',
+        value: metaAlignment,
+        onChange: setMetaAlignment,
+      },
+    ],
     sliders: [
       { name: 'Width', value: width, onChange: setWidth, min: 0, max: 12 },
       { name: 'Height', value: height, onChange: setHeight, min: 5, max: 10 },
+      {
+        name: 'Media Padding',
+        value: mediaPadding,
+        onChange: setMediaPadding,
+        min: 0,
+        max: 8,
+      },
     ],
     flagObjectProps: {
       headline,
@@ -83,12 +120,16 @@ function useControls() {
       meta,
       media,
       contentHidden,
+      reverseContentOrder,
       border,
       contentDir,
       standfirstDir,
       metaDir,
       width,
       height,
+      mediaPadding,
+      textAlignment,
+      metaAlignment,
     },
   };
 }

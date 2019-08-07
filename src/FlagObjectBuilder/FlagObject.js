@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Box, Icon, Hidden } from '../primitives';
+import { Flex, Icon, Hidden } from '../primitives';
 import {
   Card,
   Headline,
@@ -34,16 +34,25 @@ export const FlagObject = ({
   metaDir,
   width,
   height,
+  mediaPadding,
+  textAlignment,
+  metaAlignment,
+  reverseContentOrder,
 }) => (
   <Card
-    flexDirection={contentDir}
+    flexDirection={`${contentDir}${reverseContentOrder ? '-reverse' : ''}`}
     width={width}
     height={height > 9 ? 'auto' : height}
     backgroundColor="neutral.6"
     justifyContent="stretch"
     borderWidth={border ? 2 : 0}
   >
-    <Flex flexDirection="column" p={2} flex="1 1 34%">
+    <Flex
+      flexDirection="column"
+      justifyContent={textAlignment}
+      p={2}
+      flex="1 1 34%"
+    >
       {headline && (
         <Headline mb={0}>
           {pillar && <Pillar blocky={contentHidden}>Football</Pillar>}{' '}
@@ -62,6 +71,7 @@ export const FlagObject = ({
         )}
         {meta && (
           <MetaContent
+            justifyContent={metaAlignment}
             flexDirection={metaDir}
             mt={2}
             contentHidden={contentHidden}
@@ -71,6 +81,7 @@ export const FlagObject = ({
     </Flex>
     {media && (
       <Media
+        m={mediaPadding}
         flex="1 1 66%"
         blocky={contentHidden}
         aspectRatio={5 / 3}

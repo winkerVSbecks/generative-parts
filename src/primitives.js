@@ -139,6 +139,7 @@ export const AspectRatioImage = styled.div(
     backgroundImage: props.image ? `url(${props.image})` : null,
     paddingBottom: `${(1 / props.aspectRatio) * 100}%`,
   }),
+  space,
   layout,
   flexbox,
 );
