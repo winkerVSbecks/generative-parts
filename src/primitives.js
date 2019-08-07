@@ -55,6 +55,7 @@ export const Box = styled.div(
   color,
   layout,
   flexbox,
+  border,
 );
 
 export const Flex = styled(Box)({
@@ -125,6 +126,26 @@ export const BackgroundImage = styled.div(
   layout,
   flexbox,
 );
+
+export const AspectRatioImage = styled.div(
+  {
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    height: 0,
+  },
+  props => ({
+    backgroundColor: props.theme.colors.gray,
+    backgroundImage: props.image ? `url(${props.image})` : null,
+    paddingBottom: `${(1 / props.aspectRatio) * 100}%`,
+  }),
+  space,
+  layout,
+  flexbox,
+);
+AspectRatioImage.defaultProps = {
+  aspectRatio: 1,
+};
 
 export const Card = styled(Box)(
   { display: 'flex', overflow: 'hidden' },
@@ -262,3 +283,14 @@ Input.defaultProps = {
   ml: 0,
   mr: 0,
 };
+
+export const Hidden = styled.span`
+  border: 0 !important;
+  clip: rect(0 0 0 0) !important;
+  height: 0.0625rem !important;
+  margin: -0.0625rem !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 0.0625rem !important;
+`;

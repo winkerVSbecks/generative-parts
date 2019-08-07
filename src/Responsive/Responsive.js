@@ -11,9 +11,10 @@ import { Toggle } from '../Toggle';
 export function Responsive() {
   const [data, activeIndex, selectTheme] = useThemes();
   const [debug, setDebug] = useState(false);
+  console.log(data.theme, activeIndex);
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={{ ...theme, ...data.theme }}>
       <Global
         styles={{
           body: {
@@ -26,7 +27,12 @@ export function Responsive() {
         <Flex mr={4} flexDirection="column" alignItems="center">
           <RadioGroup
             title="Select a Theme"
-            items={[0, 1, 2]}
+            hideTitle
+            items={[
+              { label: 0, value: 0 },
+              { label: 1, value: 1 },
+              { label: 2, value: 2 },
+            ]}
             selected={activeIndex}
             onChange={selectTheme}
           />

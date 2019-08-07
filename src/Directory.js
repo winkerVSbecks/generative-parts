@@ -10,6 +10,7 @@ import { ReactComponent as SunIcon } from './icons/sun.svg';
 import { ReactComponent as SlidersIcon } from './icons/sliders.svg';
 import { ReactComponent as MaxIcon } from './icons/maximize-2.svg';
 import { ReactComponent as LayoutIcon } from './icons/layout.svg';
+import { ReactComponent as FlagIcon } from './icons/flag.svg';
 
 const ExperimentLink = styled(Link, { shouldForwardProp })(
   { display: 'flex' },
@@ -67,6 +68,13 @@ export const Directory = () => (
           to="/responsive"
         >
           <Icon as={MaxIcon} />
+        </ExperimentLink>
+        <ExperimentLink
+          as={RouterLink}
+          title="Responsive components"
+          to="/flag"
+        >
+          <Icon as={FlagIcon} />
         </ExperimentLink>
       </Flex>
 

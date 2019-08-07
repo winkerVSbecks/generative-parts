@@ -1,22 +1,32 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Box, Text } from './primitives';
+import { Box, Flex, Text, Label } from './primitives';
 
-const size = 2;
-
-const RadioGroupContainer = styled(Box)({
-  borderWidth: 2,
-  borderStyle: 'solid',
-  borderColor: 'white',
-  borderRadius: 3,
+const RadioGroupFieldset = styled(Flex)({
   padding: 0,
+  border: 0,
+});
+RadioGroupFieldset.defaultProps = {
+  // as: 'fieldset', doesn't support flex
+  role: 'group',
+  flexDirection: 'column',
+  mt: 0,
+  mb: 0,
+  mr: 0,
+  ml: 0,
+};
+
+const RadioGroupContainer = styled(Flex)({
   marginLeft: 0,
   ':hover, :focus-within': {
     borderColor: '#e5e5e5',
   },
 });
 RadioGroupContainer.defaultProps = {
-  as: 'fieldset',
+  borderWidth: 2,
+  borderStyle: 'solid',
+  borderColor: 'white',
+  borderRadius: '3px',
 };
 
 const RadioGroupTitle = styled.legend`
@@ -43,36 +53,61 @@ const RadioGroupLabel = styled(Text)({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  borderRadius: 3,
+  borderRadius: '3px',
 });
 
 RadioGroupLabel.defaultProps = {
   as: 'label',
   backgroundColor: '#fff',
   lineHeight: 'solid',
-  width: size,
-  height: size,
   color: 'black',
   fontWeight: 5,
   fontSize: 2,
 };
 
-export const RadioGroup = ({ onChange, selected, title, items, ...props }) => (
-  <RadioGroupContainer as="fieldset" {...props}>
-    <RadioGroupTitle>{title}</RadioGroupTitle>
-    <Box width={size} alignItems="center" justifyContent="center">
+export const RadioGroup = ({
+  onChange,
+  selected,
+  title,
+  hideTitle = false,
+  items,
+  direction = 'column',
+  size = 2,
+  ...props
+}) => (
+  <RadioGroupFieldset flexDirection={direction} alignItems="center" {...props}>
+    {hideTitle ? (
+      <RadioGroupTitle>{title}</RadioGroupTitle>
+    ) : (
+      <Label width={4} mb={direction === 'column' ? 2 : 0}>
+        {title}
+      </Label>
+    )}
+    <RadioGroupContainer
+      flexDirection={direction}
+      alignItems="center"
+      justifyContent="center"
+    >
       {items.map(item => (
-        <Box key={`item-${item}`}>
+        <Box key={`item-${item.value}`}>
           <RadioInput
             type="radio"
-            id={`item-${item}`}
-            name="radios"
-            onChange={() => onChange(item)}
-            checked={selected === item}
+            id={`item-${title.replace(/\s/g, '-').toLowerCase()}-${item.value}`}
+            name={title.replace(/\s/g, '-').toLowerCase()}
+            onChange={() => onChange(item.value)}
+            checked={selected === item.value}
           />
-          <RadioGroupLabel htmlFor={`item-${item}`}>{item}</RadioGroupLabel>
+          <RadioGroupLabel
+            width={size}
+            height={size}
+            htmlFor={`item-${title.replace(/\s/g, '-').toLowerCase()}-${
+              item.value
+            }`}
+          >
+            {item.label}
+          </RadioGroupLabel>
         </Box>
       ))}
-    </Box>
-  </RadioGroupContainer>
+    </RadioGroupContainer>
+  </RadioGroupFieldset>
 );

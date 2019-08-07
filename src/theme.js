@@ -13,6 +13,8 @@ export default {
   fontWeights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
   fonts: {
     inter: '"Inter", sans-serif',
+    sans:
+      "-apple-system, BlinkMacSystemFont, 'avenir next', avenir, 'helvetica neue', helvetica, ubuntu, roboto, noto, 'segoe ui', arial, sans-serif",
   },
   lineHeights: {
     solid: 1,

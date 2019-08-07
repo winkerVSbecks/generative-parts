@@ -9,6 +9,7 @@
     "@reach/router": "^1.2.1",
     "@rehooks/component-size": "^1.0.2",
     "@styled-system/should-forward-prop": "^5.0.12",
+    "@styled-system/theme-get": "^5.0.18",
     "canvas-sketch-util": "^1.8.0",
     "chroma-js": "^2.0.3",
     "constate": "^1.2.0",

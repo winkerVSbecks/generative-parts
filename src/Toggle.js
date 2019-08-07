@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { color } from 'styled-system';
+import { color, space } from 'styled-system';
 import posed from 'react-pose';
 
 const ToggleIndicator = posed.circle({
@@ -13,12 +13,13 @@ const ToggleIndicator = posed.circle({
 });
 
 const ToggleButton = styled.svg`
-  padding: ${props => props.theme.space[3]}px;
+  ${space}
   ${color}
 `;
 
 ToggleButton.defaultProps = {
   color: 'white',
+  p: 3,
 };
 
 export const Toggle = ({ enabled, onClick, ...props }) => (
