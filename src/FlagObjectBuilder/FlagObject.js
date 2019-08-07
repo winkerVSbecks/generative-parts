@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Icon, Hidden } from '../primitives';
+import { Flex, Icon, Hidden, Box } from '../primitives';
 import {
   Card,
   Headline,
@@ -38,11 +38,12 @@ export const FlagObject = ({
   textAlignment,
   metaAlignment,
   reverseContentOrder,
+  mediaTextRadio,
 }) => (
   <Card
     flexDirection={`${contentDir}${reverseContentOrder ? '-reverse' : ''}`}
     width={width}
-    height={height > 9 ? 'auto' : height}
+    // height={height > 9 ? 'auto' : height}
     backgroundColor="neutral.6"
     justifyContent="stretch"
     borderWidth={border ? 2 : 0}
@@ -51,7 +52,7 @@ export const FlagObject = ({
       flexDirection="column"
       justifyContent={textAlignment}
       p={2}
-      flex="1 1 34%"
+      flex={`1 1 ${100 - mediaTextRadio}%`}
     >
       {headline && (
         <Headline mb={0}>
@@ -80,13 +81,9 @@ export const FlagObject = ({
       </Flex>
     </Flex>
     {media && (
-      <Media
-        m={mediaPadding}
-        flex="1 1 66%"
-        blocky={contentHidden}
-        aspectRatio={5 / 3}
-        image={story.media}
-      />
+      <Box m={mediaPadding} flex={`1 1 ${mediaTextRadio}%`}>
+        <Media blocky={contentHidden} aspectRatio={5 / 3} image={story.media} />
+      </Box>
     )}
   </Card>
 );

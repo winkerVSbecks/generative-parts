@@ -57,6 +57,7 @@ function useControls() {
   const [width, setWidth] = React.useState(10);
   const [height, setHeight] = React.useState(10);
   const [mediaPadding, setMediaPadding] = React.useState(0);
+  const [mediaTextRadio, setMediaTextRadio] = React.useState(66);
 
   return {
     toggles: [
@@ -104,7 +105,14 @@ function useControls() {
     ],
     sliders: [
       { name: 'Width', value: width, onChange: setWidth, min: 0, max: 12 },
-      { name: 'Height', value: height, onChange: setHeight, min: 5, max: 10 },
+      // { name: 'Height', value: height, onChange: setHeight, min: 5, max: 10 },
+      {
+        name: 'Media Text Ratio',
+        value: mediaTextRadio,
+        onChange: setMediaTextRadio,
+        min: 0,
+        max: 100,
+      },
       {
         name: 'Media Padding',
         value: mediaPadding,
@@ -130,6 +138,7 @@ function useControls() {
       mediaPadding,
       textAlignment,
       metaAlignment,
+      mediaTextRadio,
     },
   };
 }

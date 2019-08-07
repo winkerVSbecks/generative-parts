@@ -52,7 +52,7 @@ export const Controls = ({
 }) => {
   return (
     <Box p={3} {...props}>
-      <Heading as="h2" mt={0} mb={3}>
+      <Heading as="h2" mt={3} mb={3}>
         Controls
       </Heading>
       <Heading
@@ -71,7 +71,7 @@ export const Controls = ({
       <Heading
         as="h3"
         fontSize={1}
-        mt={4}
+        mt={5}
         mb={2}
         color="neutral.2"
         style={{ textTransform: 'uppercase', letterSpacing: '0.1em' }}
@@ -97,7 +97,7 @@ export const Controls = ({
       <Heading
         as="h3"
         fontSize={1}
-        mt={4}
+        mt={5}
         mb={3}
         color="neutral.2"
         style={{ textTransform: 'uppercase', letterSpacing: '0.1em' }}
